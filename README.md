@@ -19,5 +19,7 @@ out result
 
 Program running speed test:
 
+
 1 Intel(R) Core(TM) i7-4790 CPU @3.6GHZ 8G(RAM)    run a picture cost 0.9 second
+
 2 use one Titan GPU, can run  20/fps;
