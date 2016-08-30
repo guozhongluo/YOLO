@@ -1,0 +1,40 @@
+﻿  yolo.c
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(25): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(26): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(24): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(35): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(36): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(38): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(40): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(41): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(42): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(45): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(46): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(47): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(52): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(53): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(59): warning C4305: “return”: 从“double”到“float”截断
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(71): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(79): warning C4244: “return”: 从“int”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(81): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(82): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(83): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\activations.h(85): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(20): warning C4244: “函数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(21): warning C4244: “=”: 从“time_t”转换到“unsigned int”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(72): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(101): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(102): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(126): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(127): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(119): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(120): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(121): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(122): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(144): warning C4244: “函数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(172): warning C4305: “初始化”: 从“double”到“float”截断
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(234): warning C4244: “函数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(259): warning C4305: “初始化”: 从“double”到“float”截断
+d:\vs2013_\darknet_lgz\darknet_lgz\src\yolo.c(373): warning C4305: “函数”: 从“double”到“float”截断
+  darknet_lgz.vcxproj -> D:\vs2013_\darknet_lgz\x64\Debug\darknet_lgz.exe
+  darknet_lgz.vcxproj -> D:\vs2013_\darknet_lgz\x64\Debug\darknet_lgz.pdb (Full PDB)

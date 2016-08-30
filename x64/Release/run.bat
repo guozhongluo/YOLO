@@ -1,0 +1,1 @@
+darknet_lgz yolo -nogpu test yolo.cfg yolo.caffemodel person.jpg
