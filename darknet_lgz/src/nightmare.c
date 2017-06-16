@@ -1,8 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "darknet.h"
 
 #include <math.h>
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 #include "network.h"
 #include "parser.h"
@@ -12,7 +15,10 @@
 #ifdef OPENCV
 #include "opencv2/highgui/highgui_c.h"
 #endif
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 // ./darknet nightmare cfg/extractor.recon.cfg ~/trained/yolo-coco.conv frame6.png -reconstruct -iters 500 -i 3 -lambda .1 -rate .01 -smooth 2
 
@@ -58,12 +64,15 @@ void optimize_picture(network *net, image orig, int max_layer, float scale, floa
     image delta = make_image(im.w, im.h, im.c);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef GPU
     net->delta_gpu = cuda_make_array(delta.data, im.w*im.h*im.c);
     cuda_push_array(net->input_gpu, im.data, net->inputs);
 
     forward_network_gpu(*net);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     network_state state = {0};
 
 #ifdef GPU
@@ -71,13 +80,17 @@ void optimize_picture(network *net, image orig, int max_layer, float scale, floa
     state.delta = cuda_make_array(im.data, im.w*im.h*im.c);
 
     forward_network_gpu(*net, state);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     copy_ongpu(last.outputs, last.output_gpu, 1, last.delta_gpu, 1);
 
     cuda_pull_array(last.delta_gpu, last.delta, last.outputs);
     calculate_loss(last.delta, last.delta, last.outputs, thresh);
     cuda_push_array(last.delta_gpu, last.delta, last.outputs);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     backward_network_gpu(*net);
 
@@ -92,6 +105,8 @@ void optimize_picture(network *net, image orig, int max_layer, float scale, floa
     calculate_loss(last.output, last.delta, last.outputs, thresh);
     backward_network(*net);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     backward_network_gpu(*net, state);
 
     cuda_pull_array(state.delta, delta.data, im.w*im.h*im.c);
@@ -104,7 +119,10 @@ void optimize_picture(network *net, image orig, int max_layer, float scale, floa
     copy_cpu(last.outputs, last.output, 1, last.delta, 1);
     calculate_loss(last.output, last.delta, last.outputs, thresh);
     backward_network(*net, state);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #endif
 
     if(flip) flip_image(delta);
@@ -171,6 +189,7 @@ void reconstruct_picture(network net, float *features, image recon, image update
         image delta = make_image(recon.w, recon.h, recon.c);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef GPU
         layer l = get_network_output_layer(net);
         cuda_push_array(net.input_gpu, recon.data, recon.w*recon.h*recon.c);
@@ -198,6 +217,8 @@ void reconstruct_picture(network net, float *features, image recon, image update
         axpy_cpu(recon.w*recon.h*recon.c, 1, delta.data, 1, update.data, 1);
         //smooth(recon, update, lambda, smooth_size);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         network_state state = {0};
 #ifdef GPU
         state.input = cuda_make_array(recon.data, recon.w*recon.h*recon.c);
@@ -223,17 +244,24 @@ void reconstruct_picture(network net, float *features, image recon, image update
 
         axpy_cpu(recon.w*recon.h*recon.c, 1, delta.data, 1, update.data, 1);
         smooth(recon, update, lambda, smooth_size);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
         axpy_cpu(recon.w*recon.h*recon.c, rate, update.data, 1, recon.data, 1);
         scal_cpu(recon.w*recon.h*recon.c, momentum, update.data, 1);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         float mag = mag_array(delta.data, recon.w*recon.h*recon.c);
         printf("mag: %f\n", mag);
 =======
         //float mag = mag_array(recon.data, recon.w*recon.h*recon.c);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        //float mag = mag_array(recon.data, recon.w*recon.h*recon.c);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         //scal_cpu(recon.w*recon.h*recon.c, 600/mag, recon.data, 1);
 
         constrain_image(recon);
@@ -241,6 +269,7 @@ void reconstruct_picture(network net, float *features, image recon, image update
     }
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
 void run_lsd(int argc, char **argv)
@@ -351,6 +380,8 @@ void run_lsd(int argc, char **argv)
 */
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 void run_nightmare(int argc, char **argv)
 {
@@ -398,13 +429,17 @@ void run_nightmare(int argc, char **argv)
         im = resized;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     //im = letterbox_image(im, net.w, net.h);
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     float *features = 0;
     image update;
     if (reconstruct){
+<<<<<<< HEAD
 <<<<<<< HEAD
         net.n = max_layer;
         im = letterbox_image(im, net.w, net.h);
@@ -436,6 +471,8 @@ void run_nightmare(int argc, char **argv)
          */
         update = make_image(im.w, im.h, im.c);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         resize_network(&net, im.w, im.h);
 
         int zz = 0;
@@ -461,7 +498,10 @@ void run_nightmare(int argc, char **argv)
         im = make_random_image(im.w, im.h, im.c);
         update = make_image(im.w, im.h, im.c);
 
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     }
 
     int e;

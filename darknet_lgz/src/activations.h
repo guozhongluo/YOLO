@@ -1,11 +1,14 @@
 #ifndef ACTIVATIONS_H
 #define ACTIVATIONS_H
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "darknet.h"
 #include "cuda.h"
 #include "math.h"
 
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "cuda.h"
 #include "math.h"
 
@@ -13,7 +16,10 @@ typedef enum{
     LOGISTIC, RELU, RELIE, LINEAR, RAMP, TANH, PLSE, LEAKY, ELU, LOGGY, STAIR, HARDTAN, LHTAN
 }ACTIVATION;
 
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 ACTIVATION get_activation(char *s);
 
 char *get_activation_string(ACTIVATION a);
@@ -44,10 +50,14 @@ static inline float loggy_activate(float x){return 2./(1. + exp(-x)) - 1;}
 static inline float relu_activate(float x){return x*(x>0);}
 static inline float elu_activate(float x){return (x >= 0)*x + (x < 0)*(exp(x)-1);}
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline float relie_activate(float x){return (x>0) ? x : .01*x;}
 =======
 static inline float relie_activate(float x){return x*(x>0);}
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+static inline float relie_activate(float x){return x*(x>0);}
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 static inline float ramp_activate(float x){return x*(x>0)+.1*x;}
 static inline float leaky_activate(float x){return (x>0) ? x : .1*x;}
 static inline float tanh_activate(float x){return (exp(2*x)-1)/(exp(2*x)+1);}

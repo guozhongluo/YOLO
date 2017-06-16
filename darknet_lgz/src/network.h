@@ -2,13 +2,17 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "darknet.h"
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 #include "image.h"
 #include "layer.h"
 #include "data.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "tree.h"
 
@@ -20,6 +24,8 @@ void pull_network_output(network net);
 #endif
 
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 typedef enum {
     CONSTANT, STEP, EXP, POLY, STEPS, SIG, RANDOM
@@ -86,11 +92,15 @@ void update_network_gpu(network net);
 float get_current_rate(network net);
 int get_current_batch(network net);
 void free_network(network net);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void compare_networks(network n1, network n2, data d);
 char *get_layer_string(LAYER_TYPE a);
 
 network make_network(int n);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -100,6 +110,8 @@ void print_network(network net);
 int resize_network(network *net, int w, int h);
 void calc_network_cost(network net);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void forward_network(network net, network_state state);
 void backward_network(network net, network_state state);
 void update_network(network net);
@@ -133,7 +145,10 @@ float get_network_cost(network net);
 
 int get_network_nuisance(network net);
 int get_network_background(network net);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 #endif
 

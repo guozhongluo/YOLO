@@ -18,10 +18,14 @@ __global__ void binarize_kernel(float *x, int n, float *binary)
     int i = (blockIdx.x + blockIdx.y*gridDim.x) * blockDim.x + threadIdx.x;
     if (i >= n) return;
 <<<<<<< HEAD
+<<<<<<< HEAD
     binary[i] = (x[i] >= 0) ? 1 : -1;
 =======
     binary[i] = (x[i] > 0) ? 1 : -1;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    binary[i] = (x[i] > 0) ? 1 : -1;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 void binarize_gpu(float *x, int n, float *binary)
@@ -53,16 +57,21 @@ void binarize_input_gpu(float *input, int n, int size, float *binary)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __global__ void binarize_weights_kernel(float *weights, int n, int size, float *binary)
 =======
 __global__ void binarize_filters_kernel(float *filters, int n, int size, float *binary)
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+__global__ void binarize_filters_kernel(float *filters, int n, int size, float *binary)
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     int f = (blockIdx.x + blockIdx.y*gridDim.x) * blockDim.x + threadIdx.x;
     if (f >= n) return;
     int i = 0;
     float mean = 0;
     for(i = 0; i < size; ++i){
+<<<<<<< HEAD
 <<<<<<< HEAD
         mean += abs(weights[f*size + i]);
     }
@@ -85,6 +94,8 @@ void forward_convolutional_layer_gpu(convolutional_layer l, network net)
     if(l.binary){
         binarize_weights_gpu(l.weights_gpu, l.n, l.c*l.size*l.size, l.binary_weights_gpu);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         mean += abs(filters[f*size + i]);
     }
     mean = mean / size;
@@ -104,22 +115,31 @@ void forward_convolutional_layer_gpu(convolutional_layer l, network_state state)
     fill_ongpu(l.outputs*l.batch, 0, l.output_gpu, 1);
     if(l.binary){
         binarize_filters_gpu(l.filters_gpu, l.n, l.c*l.size*l.size, l.binary_filters_gpu);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         swap_binary(&l);
     }
 
     if(l.xnor){
+<<<<<<< HEAD
 <<<<<<< HEAD
         binarize_weights_gpu(l.weights_gpu, l.n, l.c*l.size*l.size, l.binary_weights_gpu);
         swap_binary(&l);
         binarize_gpu(net.input_gpu, l.c*l.h*l.w*l.batch, l.binary_input_gpu);
         net.input_gpu = l.binary_input_gpu;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         binarize_filters_gpu(l.filters_gpu, l.n, l.c*l.size*l.size, l.binary_filters_gpu);
         swap_binary(&l);
         binarize_gpu(state.input, l.c*l.h*l.w*l.batch, l.binary_input_gpu);
         state.input = l.binary_input_gpu;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     }
 
 #ifdef CUDNN
@@ -128,6 +148,7 @@ void forward_convolutional_layer_gpu(convolutional_layer l, network_state state)
                 &one,
                 l.srcTensorDesc,
 <<<<<<< HEAD
+<<<<<<< HEAD
                 net.input_gpu,
                 l.weightDesc,
                 l.weights_gpu,
@@ -135,13 +156,18 @@ void forward_convolutional_layer_gpu(convolutional_layer l, network_state state)
                 l.fw_algo,
                 net.workspace,
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                 state.input,
                 l.filterDesc,
                 l.filters_gpu,
                 l.convDesc,
                 l.fw_algo,
                 state.workspace,
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                 l.workspace_size,
                 &one,
                 l.dstTensorDesc,
@@ -154,6 +180,7 @@ void forward_convolutional_layer_gpu(convolutional_layer l, network_state state)
     int n = l.out_w*l.out_h;
     for(i = 0; i < l.batch; ++i){
 <<<<<<< HEAD
+<<<<<<< HEAD
         im2col_ongpu(net.input_gpu + i*l.c*l.h*l.w, l.c,  l.h,  l.w,  l.size,  l.stride, l.pad, net.workspace);
         float * a = l.weights_gpu;
         float * b = net.workspace;
@@ -162,12 +189,18 @@ void forward_convolutional_layer_gpu(convolutional_layer l, network_state state)
         float * a = l.filters_gpu;
         float * b = state.workspace;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        im2col_ongpu(state.input + i*l.c*l.h*l.w, l.c,  l.h,  l.w,  l.size,  l.stride, l.pad, state.workspace);
+        float * a = l.filters_gpu;
+        float * b = state.workspace;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         float * c = l.output_gpu;
         gemm_ongpu(0,0,m,n,k,1.,a,k,b,n,1.,c+i*m*n,n);
     }
 #endif
 
     if (l.batch_normalize) {
+<<<<<<< HEAD
 <<<<<<< HEAD
         forward_batchnorm_layer_gpu(l, net);
     } else {
@@ -178,12 +211,18 @@ void forward_convolutional_layer_gpu(convolutional_layer l, network_state state)
     }
     add_bias_gpu(l.output_gpu, l.biases_gpu, l.batch, l.n, l.out_w*l.out_h);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        forward_batchnorm_layer_gpu(l, state);
+    }
+    add_bias_gpu(l.output_gpu, l.biases_gpu, l.batch, l.n, l.out_w*l.out_h);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     activate_array_ongpu(l.output_gpu, l.outputs*l.batch, l.activation);
     //if(l.dot > 0) dot_error_gpu(l);
     if(l.binary || l.xnor) swap_binary(&l);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 __global__ void smooth_kernel(float *x, int n, int w, int h, int c, int size, float rate, float *delta)
 {
@@ -245,6 +284,8 @@ void backward_convolutional_layer_gpu(convolutional_layer l, network net)
 
     if(l.xnor) net.input_gpu = l.binary_input_gpu;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void backward_convolutional_layer_gpu(convolutional_layer l, network_state state)
 {
     gradient_array_ongpu(l.output_gpu, l.outputs*l.batch, l.activation, l.delta_gpu);
@@ -257,21 +298,29 @@ void backward_convolutional_layer_gpu(convolutional_layer l, network_state state
     float *original_input = state.input;
 
     if(l.xnor) state.input = l.binary_input_gpu;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #ifdef CUDNN
     float one = 1;
     cudnnConvolutionBackwardFilter(cudnn_handle(),
             &one,
             l.srcTensorDesc,
 <<<<<<< HEAD
+<<<<<<< HEAD
             net.input_gpu,
 =======
             state.input,
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+            state.input,
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             l.ddstTensorDesc,
             l.delta_gpu,
             l.convDesc,
             l.bf_algo,
+<<<<<<< HEAD
 <<<<<<< HEAD
             net.workspace,
             l.workspace_size,
@@ -286,6 +335,8 @@ void backward_convolutional_layer_gpu(convolutional_layer l, network_state state
                 l.weightDesc,
                 l.weights_gpu,
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             state.workspace,
             l.workspace_size,
             &one,
@@ -298,11 +349,15 @@ void backward_convolutional_layer_gpu(convolutional_layer l, network_state state
                 &one,
                 l.filterDesc,
                 l.filters_gpu,
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                 l.ddstTensorDesc,
                 l.delta_gpu,
                 l.convDesc,
                 l.bd_algo,
+<<<<<<< HEAD
 <<<<<<< HEAD
                 net.workspace,
                 l.workspace_size,
@@ -312,6 +367,8 @@ void backward_convolutional_layer_gpu(convolutional_layer l, network_state state
         if(l.binary || l.xnor) swap_binary(&l);
         if(l.xnor) gradient_array_ongpu(original_input, l.batch*l.c*l.h*l.w, HARDTAN, net.delta_gpu);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                 state.workspace,
                 l.workspace_size,
                 &one,
@@ -319,7 +376,10 @@ void backward_convolutional_layer_gpu(convolutional_layer l, network_state state
                 state.delta);
         if(l.binary || l.xnor) swap_binary(&l);
         if(l.xnor) gradient_array_ongpu(original_input, l.batch*l.c*l.h*l.w, HARDTAN, state.delta);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     }
 
 #else
@@ -330,6 +390,7 @@ void backward_convolutional_layer_gpu(convolutional_layer l, network_state state
     int i;
     for(i = 0; i < l.batch; ++i){
         float * a = l.delta_gpu;
+<<<<<<< HEAD
 <<<<<<< HEAD
         float * b = net.workspace;
         float * c = l.weight_updates_gpu;
@@ -351,6 +412,8 @@ void backward_convolutional_layer_gpu(convolutional_layer l, network_state state
             }
             if(l.xnor) gradient_array_ongpu(original_input + i*l.c*l.h*l.w, l.c*l.h*l.w, HARDTAN, net.delta_gpu + i*l.c*l.h*l.w);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         float * b = state.workspace;
         float * c = l.filter_updates_gpu;
 
@@ -370,7 +433,10 @@ void backward_convolutional_layer_gpu(convolutional_layer l, network_state state
                 swap_binary(&l);
             }
             if(l.xnor) gradient_array_ongpu(original_input + i*l.c*l.h*l.w, l.c*l.h*l.w, HARDTAN, state.delta + i*l.c*l.h*l.w);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         }
     }
 #endif
@@ -378,6 +444,7 @@ void backward_convolutional_layer_gpu(convolutional_layer l, network_state state
 
 void pull_convolutional_layer(convolutional_layer layer)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     cuda_pull_array(layer.weights_gpu, layer.weights, layer.c*layer.n*layer.size*layer.size);
     cuda_pull_array(layer.biases_gpu, layer.biases, layer.n);
@@ -387,6 +454,11 @@ void pull_convolutional_layer(convolutional_layer layer)
     cuda_pull_array(layer.biases_gpu, layer.biases, layer.n);
     cuda_pull_array(layer.filter_updates_gpu, layer.filter_updates, layer.c*layer.n*layer.size*layer.size);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    cuda_pull_array(layer.filters_gpu, layer.filters, layer.c*layer.n*layer.size*layer.size);
+    cuda_pull_array(layer.biases_gpu, layer.biases, layer.n);
+    cuda_pull_array(layer.filter_updates_gpu, layer.filter_updates, layer.c*layer.n*layer.size*layer.size);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     cuda_pull_array(layer.bias_updates_gpu, layer.bias_updates, layer.n);
     if (layer.batch_normalize){
         cuda_pull_array(layer.scales_gpu, layer.scales, layer.n);
@@ -394,16 +466,20 @@ void pull_convolutional_layer(convolutional_layer layer)
         cuda_pull_array(layer.rolling_variance_gpu, layer.rolling_variance, layer.n);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (layer.adam){
         cuda_pull_array(layer.m_gpu, layer.m, layer.c*layer.n*layer.size*layer.size);
         cuda_pull_array(layer.v_gpu, layer.v, layer.c*layer.n*layer.size*layer.size);
     }
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 void push_convolutional_layer(convolutional_layer layer)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     cuda_push_array(layer.weights_gpu, layer.weights, layer.c*layer.n*layer.size*layer.size);
     cuda_push_array(layer.biases_gpu, layer.biases, layer.n);
@@ -413,12 +489,18 @@ void push_convolutional_layer(convolutional_layer layer)
     cuda_push_array(layer.biases_gpu, layer.biases, layer.n);
     cuda_push_array(layer.filter_updates_gpu, layer.filter_updates, layer.c*layer.n*layer.size*layer.size);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    cuda_push_array(layer.filters_gpu, layer.filters, layer.c*layer.n*layer.size*layer.size);
+    cuda_push_array(layer.biases_gpu, layer.biases, layer.n);
+    cuda_push_array(layer.filter_updates_gpu, layer.filter_updates, layer.c*layer.n*layer.size*layer.size);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     cuda_push_array(layer.bias_updates_gpu, layer.bias_updates, layer.n);
     if (layer.batch_normalize){
         cuda_push_array(layer.scales_gpu, layer.scales, layer.n);
         cuda_push_array(layer.rolling_mean_gpu, layer.rolling_mean, layer.n);
         cuda_push_array(layer.rolling_variance_gpu, layer.rolling_variance, layer.n);
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
     if (layer.adam){
         cuda_push_array(layer.m_gpu, layer.m, layer.c*layer.n*layer.size*layer.size);
@@ -464,6 +546,8 @@ void update_convolutional_layer_gpu(layer l, int batch, float learning_rate, flo
         }
     }
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 void update_convolutional_layer_gpu(convolutional_layer layer, int batch, float learning_rate, float momentum, float decay)
@@ -479,7 +563,10 @@ void update_convolutional_layer_gpu(convolutional_layer layer, int batch, float 
     axpy_ongpu(size, -decay*batch, layer.filters_gpu, 1, layer.filter_updates_gpu, 1);
     axpy_ongpu(size, learning_rate/batch, layer.filter_updates_gpu, 1, layer.filters_gpu, 1);
     scal_ongpu(size, momentum, layer.filter_updates_gpu, 1);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 

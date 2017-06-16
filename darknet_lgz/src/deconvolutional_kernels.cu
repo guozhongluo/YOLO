@@ -6,9 +6,12 @@ extern "C" {
 #include "convolutional_layer.h"
 #include "deconvolutional_layer.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "batchnorm_layer.h"
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "gemm.h"
 #include "blas.h"
 #include "im2col.h"
@@ -17,6 +20,7 @@ extern "C" {
 #include "cuda.h"
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern "C" void forward_deconvolutional_layer_gpu(layer l, network net)
 {
@@ -84,6 +88,8 @@ extern "C" void backward_deconvolutional_layer_gpu(layer l, network net)
 
             gemm_ongpu(0,0,m,n,k,1,a,k,b,n,1,c,n);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 extern "C" void forward_deconvolutional_layer_gpu(deconvolutional_layer layer, network_state state)
 {
     int i;
@@ -146,11 +152,15 @@ extern "C" void backward_deconvolutional_layer_gpu(deconvolutional_layer layer, 
             float *c = state.delta + i*n*m;
 
             gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         }
     }
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern "C" void pull_deconvolutional_layer(layer l)
 {
@@ -202,6 +212,8 @@ void update_deconvolutional_layer_gpu(layer l, int batch, float learning_rate, f
         }
     }
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 extern "C" void pull_deconvolutional_layer(deconvolutional_layer layer)
 {
     cuda_pull_array(layer.filters_gpu, layer.filters, layer.c*layer.n*layer.size*layer.size);
@@ -228,6 +240,9 @@ extern "C" void update_deconvolutional_layer_gpu(deconvolutional_layer layer, fl
     axpy_ongpu(size, -decay, layer.filters_gpu, 1, layer.filter_updates_gpu, 1);
     axpy_ongpu(size, learning_rate, layer.filter_updates_gpu, 1, layer.filters_gpu, 1);
     scal_ongpu(size, momentum, layer.filter_updates_gpu, 1);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 

@@ -34,6 +34,7 @@ __global__ void im2col_gpu_kernel(const int n, const float* data_im,
                 int h = h_in + i;
                 int w = w_in + j;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
                 *data_col_ptr = (h >= 0 && w >= 0 && h < height && w < width) ?
                     data_im_ptr[i * width + j] : 0;
@@ -44,6 +45,10 @@ __global__ void im2col_gpu_kernel(const int n, const float* data_im,
                 *data_col_ptr = (h >= 0 && w >= 0 && h < height && w < width) ?
                     data_im_ptr[i * width + j] : 0;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+                *data_col_ptr = (h >= 0 && w >= 0 && h < height && w < width) ?
+                    data_im_ptr[i * width + j] : 0;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                 data_col_ptr += height_col * width_col;
             }
         }
@@ -56,9 +61,13 @@ void im2col_ongpu(float *im,
     // We are going to launch channels * height_col * width_col kernels, each
     // kernel responsible for copying a single-channel grid.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     pad = pad ? ksize/2 : 0;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    pad = pad ? ksize/2 : 0;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int height_col = (height + 2 * pad - ksize) / stride + 1;
     int width_col = (width + 2 * pad - ksize) / stride + 1;
     int num_kernels = channels * height_col * width_col;
@@ -69,7 +78,10 @@ void im2col_ongpu(float *im,
                 width_col, data_col);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 /*
    __global__ void im2col_pad_kernel(float *im,
    int channels,  int height,  int width,
@@ -160,4 +172,7 @@ int ksize,  int stride,  int pad, float *data_col)
     check_error(cudaPeekAtLastError());
 }
 */
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592

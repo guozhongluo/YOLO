@@ -54,6 +54,7 @@ void backward_scale_gpu(float *x_norm, float *delta, int batch, int n, int size,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __global__ void add_bias_kernel(float *output, float *biases, int batch, int n, int size)
 {
     int index = (blockIdx.x + blockIdx.y*gridDim.x) * blockDim.x + threadIdx.x;
@@ -66,6 +67,8 @@ __global__ void add_bias_kernel(float *output, float *biases, int batch, int n, 
 
     output[(k*n+j)*size + i] += biases[j];
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 __global__ void add_bias_kernel(float *output, float *biases, int n, int size)
 {
     int offset = blockIdx.x * blockDim.x + threadIdx.x;
@@ -73,21 +76,30 @@ __global__ void add_bias_kernel(float *output, float *biases, int n, int size)
     int batch = blockIdx.z;
 
     if(offset < size) output[(batch*n+filter)*size + offset] += biases[filter];
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 void add_bias_gpu(float *output, float *biases, int batch, int n, int size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     int num = n*size*batch;
 
     add_bias_kernel<<<cuda_gridsize(num), BLOCK>>>(output, biases, batch, n, size);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     dim3 dimGrid((size-1)/BLOCK + 1, n, batch);
     dim3 dimBlock(BLOCK, 1, 1);
 
     add_bias_kernel<<<dimGrid, dimBlock>>>(output, biases, n, size);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     check_error(cudaPeekAtLastError());
 }
 
@@ -161,6 +173,7 @@ void backward_bias_gpu(float *bias_updates, float *delta, int batch, int n, int 
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __global__ void adam_kernel(int N, float *x, float *m, float *v, float B1, float B2, float rate, float eps, int t)
 {
     int index = (blockIdx.x + blockIdx.y*gridDim.x) * blockDim.x + threadIdx.x;
@@ -178,6 +191,8 @@ extern "C" void adam_gpu(int n, float *x, float *m, float *v, float B1, float B2
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 __global__ void normalize_kernel(int N, float *x, float *mean, float *variance, int batch, int filters, int spatial)
 {
     int index = (blockIdx.x + blockIdx.y*gridDim.x) * blockDim.x + threadIdx.x;
@@ -185,10 +200,14 @@ __global__ void normalize_kernel(int N, float *x, float *mean, float *variance, 
     int f = (index/spatial)%filters;
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     x[index] = (x[index] - mean[f])/(sqrt(variance[f] + .00001f));
 =======
     x[index] = (x[index] - mean[f])/(sqrt(variance[f]) + .000001f);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    x[index] = (x[index] - mean[f])/(sqrt(variance[f]) + .000001f);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 __global__ void normalize_delta_kernel(int N, float *x, float *mean, float *variance, float *mean_delta, float *variance_delta, int batch, int filters, int spatial, float *delta)
@@ -198,10 +217,14 @@ __global__ void normalize_delta_kernel(int N, float *x, float *mean, float *vari
     int f = (index/spatial)%filters;
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     delta[index] = delta[index] * 1./(sqrt(variance[f] + .00001f)) + variance_delta[f] * 2. * (x[index] - mean[f]) / (spatial * batch) + mean_delta[f]/(spatial*batch);
 =======
     delta[index] = delta[index] * 1./(sqrt(variance[f]) + .000001f) + variance_delta[f] * 2. * (x[index] - mean[f]) / (spatial * batch) + mean_delta[f]/(spatial*batch);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    delta[index] = delta[index] * 1./(sqrt(variance[f]) + .000001f) + variance_delta[f] * 2. * (x[index] - mean[f]) / (spatial * batch) + mean_delta[f]/(spatial*batch);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 extern "C" void normalize_delta_gpu(float *x, float *mean, float *variance, float *mean_delta, float *variance_delta, int batch, int filters, int spatial, float *delta)
@@ -224,10 +247,14 @@ __global__ void  variance_delta_kernel(float *x, float *delta, float *mean, floa
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     variance_delta[i] *= -.5 * pow(variance[i] + .00001f, (float)(-3./2.));
 =======
     variance_delta[i] *= -.5 * pow(variance[i] + .000001f, (float)(-3./2.));
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    variance_delta[i] *= -.5 * pow(variance[i] + .000001f, (float)(-3./2.));
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 __global__ void accumulate_kernel(float *x, int n, int groups, float *sum)
@@ -260,20 +287,27 @@ __global__ void fast_mean_delta_kernel(float *delta, float *variance, int batch,
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     __syncthreads();
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     if(id == 0){
         mean_delta[filter] = 0;
         for(i = 0; i < threads; ++i){
             mean_delta[filter] += local[i];
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         mean_delta[filter] *= (-1./sqrt(variance[filter] + .00001f));
 =======
         mean_delta[filter] *= (-1./sqrt(variance[filter] + .000001f));
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        mean_delta[filter] *= (-1./sqrt(variance[filter] + .000001f));
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     }
 }
 
@@ -297,20 +331,27 @@ __global__ void  fast_variance_delta_kernel(float *x, float *delta, float *mean,
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     __syncthreads();
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     if(id == 0){
         variance_delta[filter] = 0;
         for(i = 0; i < threads; ++i){
             variance_delta[filter] += local[i];
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         variance_delta[filter] *= -.5 * pow(variance[filter] + .00001f, (float)(-3./2.));
 =======
         variance_delta[filter] *= -.5 * pow(variance[filter] + .000001f, (float)(-3./2.));
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        variance_delta[filter] *= -.5 * pow(variance[filter] + .000001f, (float)(-3./2.));
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     }
 }
 
@@ -328,10 +369,14 @@ __global__ void mean_delta_kernel(float *delta, float *variance, int batch, int 
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     mean_delta[i] *= (-1./sqrt(variance[i] + .00001f));
 =======
     mean_delta[i] *= (-1./sqrt(variance[i] + .000001f));
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    mean_delta[i] *= (-1./sqrt(variance[i] + .000001f));
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 extern "C" void mean_delta_gpu(float *delta, float *variance, int batch, int filters, int spatial, float *mean_delta)
@@ -385,6 +430,7 @@ __global__ void variance_kernel(float *x, float *mean, int batch, int filters, i
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __global__ void reorg_kernel(int N, float *x, int w, int h, int c, int batch, int stride, int forward, float *out)
 {
     int i = (blockIdx.x + blockIdx.y*gridDim.x) * blockDim.x + threadIdx.x;
@@ -419,6 +465,8 @@ __global__ void reorg_kernel(int N, float *x, int w, int h, int c, int batch, in
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 __global__ void axpy_kernel(int N, float ALPHA, float *X, int OFFX, int INCX,  float *Y, int OFFY, int INCY)
 {
     int i = (blockIdx.x + blockIdx.y*gridDim.x) * blockDim.x + threadIdx.x;
@@ -441,6 +489,7 @@ __global__ void constrain_kernel(int N, float ALPHA, float *X, int INCX)
 {
     int i = (blockIdx.x + blockIdx.y*gridDim.x) * blockDim.x + threadIdx.x;
 <<<<<<< HEAD
+<<<<<<< HEAD
     if(i < N) X[i*INCX] = fminf(ALPHA, fmaxf(-ALPHA, X[i*INCX]));
 }
 
@@ -459,6 +508,9 @@ __global__ void add_kernel(int N, float ALPHA, float *X, int INCX)
 =======
     if(i < N) X[i*INCX] = min(ALPHA, max(-ALPHA, X[i*INCX]));
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    if(i < N) X[i*INCX] = min(ALPHA, max(-ALPHA, X[i*INCX]));
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 __global__ void scal_kernel(int N, float ALPHA, float *X, int INCX)
@@ -518,10 +570,13 @@ __global__ void  fast_mean_kernel(float *x, int batch, int filters, int spatial,
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     __syncthreads();
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     if(id == 0){
         mean[filter] = 0;
         for(i = 0; i < threads; ++i){
@@ -551,10 +606,13 @@ __global__ void  fast_variance_kernel(float *x, float *mean, int batch, int filt
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     __syncthreads();
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     if(id == 0){
         variance[filter] = 0;
         for(i = 0; i < threads; ++i){
@@ -624,6 +682,7 @@ extern "C" void copy_ongpu_offset(int N, float * X, int OFFX, int INCX, float * 
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __global__ void flatten_kernel(int N, float *x, int spatial, int layers, int batch, int forward, float *out)
 {
     int i = (blockIdx.x + blockIdx.y*gridDim.x) * blockDim.x + threadIdx.x;
@@ -657,6 +716,8 @@ extern "C" void reorg_ongpu(float *x, int w, int h, int c, int batch, int stride
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 extern "C" void mask_ongpu(int N, float * X, float mask_num, float * mask)
 {
     mask_kernel<<<cuda_gridsize(N), BLOCK>>>(N, X, mask_num, mask);
@@ -677,6 +738,7 @@ extern "C" void constrain_ongpu(int N, float ALPHA, float * X, int INCX)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern "C" void add_ongpu(int N, float ALPHA, float * X, int INCX)
 {
     add_kernel<<<cuda_gridsize(N), BLOCK>>>(N, ALPHA, X, INCX);
@@ -685,12 +747,15 @@ extern "C" void add_ongpu(int N, float ALPHA, float * X, int INCX)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 extern "C" void scal_ongpu(int N, float ALPHA, float * X, int INCX)
 {
     scal_kernel<<<cuda_gridsize(N), BLOCK>>>(N, ALPHA, X, INCX);
     check_error(cudaPeekAtLastError());
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern "C" void supp_ongpu(int N, float ALPHA, float * X, int INCX)
 {
@@ -700,6 +765,8 @@ extern "C" void supp_ongpu(int N, float ALPHA, float * X, int INCX)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 extern "C" void fill_ongpu(int N, float ALPHA, float * X, int INCX)
 {
     fill_kernel<<<cuda_gridsize(N), BLOCK>>>(N, ALPHA, X, INCX);
@@ -754,10 +821,14 @@ __global__ void smooth_l1_kernel(int n, float *pred, float *truth, float *delta,
         else {
             error[i] = 2*abs_val - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
             delta[i] = (diff > 0) ? 1 : -1;
 =======
             delta[i] = (diff < 0) ? -1 : 1;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+            delta[i] = (diff < 0) ? -1 : 1;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         }
     }
 }
@@ -785,6 +856,7 @@ extern "C" void l2_gpu(int n, float *pred, float *truth, float *delta, float *er
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __global__ void l1_kernel(int n, float *pred, float *truth, float *delta, float *error)
 {
     int i = (blockIdx.x + blockIdx.y*gridDim.x) * blockDim.x + threadIdx.x;
@@ -805,6 +877,8 @@ extern "C" void l1_gpu(int n, float *pred, float *truth, float *delta, float *er
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 __global__ void weighted_sum_kernel(int n, float *a, float *b, float *s, float *c)
 {
@@ -849,6 +923,7 @@ extern "C" void mult_add_into_gpu(int num, float *a, float *b, float *c)
     mult_add_into_kernel<<<cuda_gridsize(num), BLOCK>>>(num, a, b, c);
     check_error(cudaPeekAtLastError());
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -918,3 +993,5 @@ extern "C" void softmax_gpu(float *input, int n, int batch, int batch_offset, in
 }
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592

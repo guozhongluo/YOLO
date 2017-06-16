@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "darknet.h"
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #ifndef BASE_LAYER_H
 #define BASE_LAYER_H
 
@@ -241,4 +244,7 @@ struct layer{
 void free_layer(layer);
 
 #endif
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592

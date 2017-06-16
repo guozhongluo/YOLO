@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <assert.h>
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "network.h"
 #include "image.h"
 #include "data.h"
@@ -19,6 +22,7 @@
 #include "convolutional_layer.h"
 #include "activation_layer.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "detection_layer.h"
 #include "region_layer.h"
 #include "normalization_layer.h"
@@ -26,18 +30,24 @@
 #include "maxpool_layer.h"
 #include "reorg_layer.h"
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "deconvolutional_layer.h"
 #include "detection_layer.h"
 #include "normalization_layer.h"
 #include "batchnorm_layer.h"
 #include "maxpool_layer.h"
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "avgpool_layer.h"
 #include "cost_layer.h"
 #include "softmax_layer.h"
 #include "dropout_layer.h"
 #include "route_layer.h"
 #include "shortcut_layer.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "parser.h"
 #include "data.h"
@@ -78,6 +88,8 @@ network *load_network_p(char *cfg, char *weights, int clear)
 }
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 int get_current_batch(network net)
 {
@@ -93,10 +105,14 @@ void reset_momentum(network net)
     net.decay = 0;
     #ifdef GPU
 <<<<<<< HEAD
+<<<<<<< HEAD
         //if(net.gpu_index >= 0) update_network_gpu(net);
 =======
         if(gpu_index >= 0) update_network_gpu(net);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        if(gpu_index >= 0) update_network_gpu(net);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     #endif
 }
 
@@ -106,9 +122,12 @@ float get_current_rate(network net)
     int i;
     float rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (batch_num < net.burn_in) return net.learning_rate * pow((float)batch_num / net.burn_in, net.power);
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     switch (net.policy) {
         case CONSTANT:
             return net.learning_rate;
@@ -120,19 +139,27 @@ float get_current_rate(network net)
                 if(net.steps[i] > batch_num) return rate;
                 rate *= net.scales[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
                 //if(net.steps[i] > batch_num - 1 && net.scales[i] > 1) reset_momentum(net);
 =======
                 if(net.steps[i] > batch_num - 1) reset_momentum(net);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+                if(net.steps[i] > batch_num - 1) reset_momentum(net);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             }
             return rate;
         case EXP:
             return net.learning_rate * pow(net.gamma, batch_num);
         case POLY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             if (batch_num < net.burn_in) return net.learning_rate * pow((float)batch_num / net.burn_in, net.power);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+            if (batch_num < net.burn_in) return net.learning_rate * pow((float)batch_num / net.burn_in, net.power);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             return net.learning_rate * pow(1 - (float)batch_num / net.max_batches, net.power);
         case RANDOM:
             return net.learning_rate * pow(rand_uniform(0,1), net.power);
@@ -162,19 +189,25 @@ char *get_layer_string(LAYER_TYPE a)
         case GRU:
             return "gru";
 <<<<<<< HEAD
+<<<<<<< HEAD
         case LSTM:
 	    return "lstm";
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         case CRNN:
             return "crnn";
         case MAXPOOL:
             return "maxpool";
 <<<<<<< HEAD
+<<<<<<< HEAD
         case REORG:
             return "reorg";
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         case AVGPOOL:
             return "avgpool";
         case SOFTMAX:
@@ -182,10 +215,13 @@ char *get_layer_string(LAYER_TYPE a)
         case DETECTION:
             return "detection";
 <<<<<<< HEAD
+<<<<<<< HEAD
         case REGION:
             return "region";
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         case DROPOUT:
             return "dropout";
         case CROP:
@@ -213,6 +249,7 @@ network make_network(int n)
     net.layers = calloc(net.n, sizeof(layer));
     net.seen = calloc(1, sizeof(int));
 <<<<<<< HEAD
+<<<<<<< HEAD
     net.cost = calloc(1, sizeof(float));
     return net;
 }
@@ -234,6 +271,8 @@ void forward_network(network net)
     }
     calc_network_cost(net);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     #ifdef GPU
     net.input_gpu = calloc(1, sizeof(float *));
     net.truth_gpu = calloc(1, sizeof(float *));
@@ -292,7 +331,10 @@ void forward_network(network net, network_state state)
         }
         state.input = l.output;
     }
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 void update_network(network net)
@@ -303,9 +345,12 @@ void update_network(network net)
     for(i = 0; i < net.n; ++i){
         layer l = net.layers[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(l.update){
             l.update(l, update_batch, rate*l.learning_rate_scale, net.momentum, net.decay);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         if(l.type == CONVOLUTIONAL){
             update_convolutional_layer(l, update_batch, rate, net.momentum, net.decay);
         } else if(l.type == DECONVOLUTIONAL){
@@ -320,14 +365,20 @@ void update_network(network net)
             update_crnn_layer(l, update_batch, rate, net.momentum, net.decay);
         } else if(l.type == LOCAL){
             update_local_layer(l, update_batch, rate, net.momentum, net.decay);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         }
     }
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void calc_network_cost(network net)
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 float *get_network_output(network net)
 {
     #ifdef GPU
@@ -339,34 +390,48 @@ float *get_network_output(network net)
 }
 
 float get_network_cost(network net)
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     int i;
     float sum = 0;
     int count = 0;
     for(i = 0; i < net.n; ++i){
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(net.layers[i].cost){
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         if(net.layers[i].type == COST){
             sum += net.layers[i].cost[0];
             ++count;
         }
         if(net.layers[i].type == DETECTION){
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             sum += net.layers[i].cost[0];
             ++count;
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     *net.cost = sum/count;
 =======
     return sum/count;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    return sum/count;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 int get_predicted_class_network(network net)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     return max_index(net.output, net.outputs);
 }
@@ -401,6 +466,8 @@ float train_network_datum(network net)
     backward_network(net);
     float error = *net.cost;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     float *out = get_network_output(net);
     int k = get_network_output_size(net);
     return max_index(out, k);
@@ -479,7 +546,10 @@ float train_network_datum(network net, float *x, float *y)
     forward_network(net, state);
     backward_network(net, state);
     float error = get_network_cost(net);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     if(((*net.seen)/net.batch)%net.subdivisions == 0) update_network(net);
     return error;
 }
@@ -488,52 +558,72 @@ float train_network_sgd(network net, data d, int n)
 {
     int batch = net.batch;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     float *X = calloc(batch*d.X.cols, sizeof(float));
     float *y = calloc(batch*d.y.cols, sizeof(float));
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    float *X = calloc(batch*d.X.cols, sizeof(float));
+    float *y = calloc(batch*d.y.cols, sizeof(float));
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     int i;
     float sum = 0;
     for(i = 0; i < n; ++i){
+<<<<<<< HEAD
 <<<<<<< HEAD
         get_random_batch(d, batch, net.input, net.truth);
         float err = train_network_datum(net);
         sum += err;
     }
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         get_random_batch(d, batch, X, y);
         float err = train_network_datum(net, X, y);
         sum += err;
     }
     free(X);
     free(y);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     return (float)sum/(n*batch);
 }
 
 float train_network(network net, data d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     assert(d.X.rows % net.batch == 0);
     int batch = net.batch;
     int n = d.X.rows / batch;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int batch = net.batch;
     int n = d.X.rows / batch;
     float *X = calloc(batch*d.X.cols, sizeof(float));
     float *y = calloc(batch*d.y.cols, sizeof(float));
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     int i;
     float sum = 0;
     for(i = 0; i < n; ++i){
+<<<<<<< HEAD
 <<<<<<< HEAD
         get_next_batch(d, batch, i*batch, net.input, net.truth);
         float err = train_network_datum(net);
         sum += err;
     }
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         get_next_batch(d, batch, i*batch, X, y);
         float err = train_network_datum(net, X, y);
         sum += err;
@@ -564,7 +654,10 @@ float train_network_batch(network net, data d, int n)
         }
         update_network(net);
     }
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     return (float)sum/(n*batch);
 }
 
@@ -575,23 +668,30 @@ void set_batch_network(network *net, int b)
     for(i = 0; i < net->n; ++i){
         net->layers[i].batch = b;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CUDNN
         if(net->layers[i].type == CONVOLUTIONAL){
             cudnn_convolutional_setup(net->layers + i);
         }
 #endif
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         #ifdef CUDNN
         if(net->layers[i].type == CONVOLUTIONAL){
             cudnn_convolutional_setup(net->layers + i);
         }
         #endif
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     }
 }
 
 int resize_network(network *net, int w, int h)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef GPU
     cuda_set_device(net->gpu_index);
@@ -599,6 +699,8 @@ int resize_network(network *net, int w, int h)
 #endif
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int i;
     //if(w == net->w && h == net->h) return 0;
     net->w = w;
@@ -606,10 +708,14 @@ int resize_network(network *net, int w, int h)
     int inputs = 0;
     size_t workspace_size = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
     //fprintf(stderr, "Resizing to %d x %d...\n", w, h);
 =======
     //fprintf(stderr, "Resizing to %d x %d...", w, h);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    //fprintf(stderr, "Resizing to %d x %d...", w, h);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     //fflush(stderr);
     for (i = 0; i < net->n; ++i){
         layer l = net->layers[i];
@@ -620,6 +726,7 @@ int resize_network(network *net, int w, int h)
         }else if(l.type == MAXPOOL){
             resize_maxpool_layer(&l, w, h);
 <<<<<<< HEAD
+<<<<<<< HEAD
         }else if(l.type == REGION){
             resize_region_layer(&l, w, h);
         }else if(l.type == ROUTE){
@@ -628,6 +735,8 @@ int resize_network(network *net, int w, int h)
             resize_reorg_layer(&l, w, h);
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         }else if(l.type == AVGPOOL){
             resize_avgpool_layer(&l, w, h);
         }else if(l.type == NORMALIZATION){
@@ -644,6 +753,7 @@ int resize_network(network *net, int w, int h)
         h = l.out_h;
         if(l.type == AVGPOOL) break;
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
     layer out = get_network_output_layer(*net);
     net->inputs = net->layers[0].inputs;
@@ -670,20 +780,28 @@ int resize_network(network *net, int w, int h)
     free(net->workspace);
     net->workspace = calloc(1, workspace_size);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #ifdef GPU
         cuda_free(net->workspace);
         net->workspace = cuda_make_array(0, (workspace_size-1)/sizeof(float)+1);
 #else
         free(net->workspace);
         net->workspace = calloc(1, workspace_size);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #endif
     //fprintf(stderr, " Done!\n");
     return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 int get_network_output_size(network net)
 {
     int i;
@@ -696,7 +814,10 @@ int get_network_input_size(network net)
     return net.layers[0].inputs;
 }
 
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 detection_layer get_network_detection_layer(network net)
 {
     int i;
@@ -714,11 +835,14 @@ image get_network_image_layer(network net, int i)
 {
     layer l = net.layers[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef GPU
     //cuda_pull_array(l.output_gpu, l.output, l.outputs);
 #endif
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     if (l.out_w && l.out_h && l.out_c){
         return float_to_image(l.out_w, l.out_h, l.out_c, l.output);
     }
@@ -754,12 +878,18 @@ void visualize_network(network net)
 void top_predictions(network net, int k, int *index)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     top_k(net.output, net.outputs, k, index);
 =======
     int size = get_network_output_size(net);
     float *out = get_network_output(net);
     top_k(out, size, k, index);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    int size = get_network_output_size(net);
+    float *out = get_network_output(net);
+    top_k(out, size, k, index);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 
@@ -768,6 +898,7 @@ float *network_predict(network net, float *input)
 #ifdef GPU
     if(gpu_index >= 0)  return network_predict_gpu(net, input);
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
     net.input = input;
     net.truth = 0;
@@ -799,6 +930,8 @@ matrix network_predict_data_multi(network net, data test, int n)
     int i,j,b,m;
     int k = net.outputs;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     network_state state;
     state.net = net;
@@ -816,7 +949,10 @@ matrix network_predict_data_multi(network net, data test, int n)
 {
     int i,j,b,m;
     int k = get_network_output_size(net);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     matrix pred = make_matrix(test.X.rows, k);
     float *X = calloc(net.batch*test.X.rows, sizeof(float));
     for(i = 0; i < test.X.rows; i += net.batch){
@@ -842,10 +978,14 @@ matrix network_predict_data(network net, data test)
 {
     int i,j,b;
 <<<<<<< HEAD
+<<<<<<< HEAD
     int k = net.outputs;
 =======
     int k = get_network_output_size(net);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    int k = get_network_output_size(net);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     matrix pred = make_matrix(test.X.rows, k);
     float *X = calloc(net.batch*test.X.cols, sizeof(float));
     for(i = 0; i < test.X.rows; i += net.batch){
@@ -926,6 +1066,7 @@ float *network_accuracies(network net, data d, int n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 layer get_network_output_layer(network net)
 {
     int i;
@@ -936,6 +1077,8 @@ layer get_network_output_layer(network net)
 }
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 float network_accuracy_multi(network net, data d, int n)
 {
@@ -952,6 +1095,7 @@ void free_network(network net)
         free_layer(net.layers[i]);
     }
     free(net.layers);
+<<<<<<< HEAD
 <<<<<<< HEAD
     if(net.input) free(net.input);
     if(net.truth) free(net.truth);
@@ -989,6 +1133,8 @@ float *network_output(network net)
 }
 
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     #ifdef GPU
     if(*net.input_gpu) cuda_free(*net.input_gpu);
     if(*net.truth_gpu) cuda_free(*net.truth_gpu);
@@ -996,4 +1142,7 @@ float *network_output(network net)
     if(net.truth_gpu) free(net.truth_gpu);
     #endif
 }
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592

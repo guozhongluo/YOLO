@@ -1,9 +1,12 @@
 #include "layer.h"
 #include "cuda.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include <stdlib.h>
 
 void free_layer(layer l)
@@ -15,6 +18,7 @@ void free_layer(layer l)
 #endif
         return;
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
     if(l.cweights)           free(l.cweights);
     if(l.indexes)            free(l.indexes);
@@ -98,6 +102,8 @@ void free_layer(layer l)
     if(l.squared_gpu)             cuda_free(l.squared_gpu);
     if(l.norms_gpu)               cuda_free(l.norms_gpu);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     if(l.indexes)        free(l.indexes);
     if(l.rand)           free(l.rand);
     if(l.cost)           free(l.cost);
@@ -129,6 +135,9 @@ void free_layer(layer l)
     if(l.rand_gpu)             cuda_free(l.rand_gpu);
     if(l.squared_gpu)          cuda_free(l.squared_gpu);
     if(l.norms_gpu)            cuda_free(l.norms_gpu);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #endif
 }

@@ -1,9 +1,12 @@
 #include "matrix.h"
 #include "utils.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "blas.h"
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -78,6 +81,7 @@ void matrix_add_matrix(matrix from, matrix to)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 matrix copy_matrix(matrix m)
 {
     matrix c = {0};
@@ -94,6 +98,8 @@ matrix copy_matrix(matrix m)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 matrix make_matrix(int rows, int cols)
 {
     int i;

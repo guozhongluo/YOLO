@@ -6,6 +6,7 @@ int gpu_index = 0;
 #include "utils.h"
 #include "blas.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <assert.h>
 #include <stdlib.h>
 #include <time.h>
@@ -29,6 +30,8 @@ void check_error(cudaError_t status)
 {
     //cudaDeviceSynchronize();
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "assert.h"
 #include <stdlib.h>
 #include <time.h>
@@ -36,7 +39,10 @@ void check_error(cudaError_t status)
 
 void check_error(cudaError_t status)
 {
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     cudaError_t status2 = cudaGetLastError();
     if (status != cudaSuccess)
     {   
@@ -64,12 +70,17 @@ dim3 cuda_gridsize(size_t n){
     size_t y = 1;
     if(x > 65535){
 <<<<<<< HEAD
+<<<<<<< HEAD
         x = ceil(sqrt(k));
         y = (n-1)/(x*BLOCK) + 1;
 =======
          x = ceil(sqrt(k));
          y = (n-1)/(x*BLOCK) + 1;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+         x = ceil(sqrt(k));
+         y = (n-1)/(x*BLOCK) + 1;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     }
     dim3 d = {x, y, 1};
     //printf("%ld %ld %ld %ld\n", n, x, y, x*y*BLOCK);
@@ -80,6 +91,7 @@ dim3 cuda_gridsize(size_t n){
 cudnnHandle_t cudnn_handle()
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     static int init[16] = {0};
     static cudnnHandle_t handle[16];
     int i = cuda_get_device();
@@ -89,6 +101,8 @@ cudnnHandle_t cudnn_handle()
     }
     return handle[i];
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     static int init = 0;
     static cudnnHandle_t handle;
     if(!init) {
@@ -96,12 +110,16 @@ cudnnHandle_t cudnn_handle()
         init = 1;
     }
     return handle;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 #endif
 
 cublasHandle_t blas_handle()
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     static int init[16] = {0};
     static cublasHandle_t handle[16];
@@ -112,6 +130,8 @@ cublasHandle_t blas_handle()
     }
     return handle[i];
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     static int init = 0;
     static cublasHandle_t handle;
     if(!init) {
@@ -119,7 +139,10 @@ cublasHandle_t blas_handle()
         init = 1;
     }
     return handle;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 float *cuda_make_array(float *x, size_t n)
@@ -132,10 +155,13 @@ float *cuda_make_array(float *x, size_t n)
         status = cudaMemcpy(x_gpu, x, size, cudaMemcpyHostToDevice);
         check_error(status);
 <<<<<<< HEAD
+<<<<<<< HEAD
     } else {
         fill_ongpu(n, 0, x_gpu, 1);
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     }
     if(!x_gpu) error("Cuda malloc failed\n");
     return x_gpu;
@@ -143,6 +169,7 @@ float *cuda_make_array(float *x, size_t n)
 
 void cuda_random(float *x_gpu, size_t n)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     static curandGenerator_t gen[16];
     static int init[16] = {0};
@@ -154,6 +181,8 @@ void cuda_random(float *x_gpu, size_t n)
     }
     curandGenerateUniform(gen[i], x_gpu, n);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     static curandGenerator_t gen;
     static int init = 0;
     if(!init){
@@ -162,7 +191,10 @@ void cuda_random(float *x_gpu, size_t n)
         init = 1;
     }
     curandGenerateUniform(gen, x_gpu, n);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     check_error(cudaPeekAtLastError());
 }
 
@@ -180,15 +212,20 @@ float cuda_compare(float *x_gpu, float *x, size_t n, char *s)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int *cuda_make_int_array(int *x, size_t n)
 =======
 int *cuda_make_int_array(size_t n)
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+int *cuda_make_int_array(size_t n)
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     int *x_gpu;
     size_t size = sizeof(int)*n;
     cudaError_t status = cudaMalloc((void **)&x_gpu, size);
     check_error(status);
+<<<<<<< HEAD
 <<<<<<< HEAD
     if(x){
         status = cudaMemcpy(x_gpu, x, size, cudaMemcpyHostToDevice);
@@ -197,6 +234,8 @@ int *cuda_make_int_array(size_t n)
     if(!x_gpu) error("Cuda malloc failed\n");
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     return x_gpu;
 }
 
@@ -221,6 +260,7 @@ void cuda_pull_array(float *x_gpu, float *x, size_t n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 float cuda_mag_array(float *x_gpu, size_t n)
 {
     float *temp = calloc(n, sizeof(float));
@@ -232,4 +272,6 @@ float cuda_mag_array(float *x_gpu, size_t n)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #endif

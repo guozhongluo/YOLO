@@ -3,6 +3,7 @@
 #include <string.h>
 #include "option_list.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "utils.h"
 
 list *read_data_cfg(char *filename)
@@ -51,6 +52,8 @@ metadata get_metadata(char *file)
 }
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 int read_option(char *s, list *options)
 {

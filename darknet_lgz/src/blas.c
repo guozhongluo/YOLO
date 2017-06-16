@@ -1,5 +1,6 @@
 #include "blas.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <math.h>
 #include <assert.h>
@@ -51,6 +52,10 @@ void flatten(float *x, int size, int layers, int batch, int forward)
 #include "math.h"
 #include <assert.h>
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+#include "math.h"
+#include <assert.h>
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 void weighted_sum_cpu(float *a, float *b, float *s, int n, float *c)
 {
@@ -186,14 +191,19 @@ void smooth_l1_cpu(int n, float *pred, float *truth, float *delta, float *error)
         else {
             error[i] = 2*abs_val - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
             delta[i] = (diff < 0) ? 1 : -1;
 =======
             delta[i] = (diff < 0) ? -1 : 1;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+            delta[i] = (diff < 0) ? -1 : 1;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         }
     }
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void l1_cpu(int n, float *pred, float *truth, float *delta, float *error)
 {
@@ -207,6 +217,8 @@ void l1_cpu(int n, float *pred, float *truth, float *delta, float *error)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void l2_cpu(int n, float *pred, float *truth, float *delta, float *error)
 {
     int i;
@@ -225,6 +237,7 @@ float dot_cpu(int N, float *X, int INCX, float *Y, int INCY)
     return dot;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void softmax(float *input, int n, float temp, int stride, float *output)
 {
@@ -257,3 +270,5 @@ void softmax_cpu(float *input, int n, int batch, int batch_offset, int groups, i
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592

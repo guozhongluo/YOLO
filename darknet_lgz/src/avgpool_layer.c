@@ -5,10 +5,14 @@
 avgpool_layer make_avgpool_layer(int batch, int w, int h, int c)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     fprintf(stderr, "avg                     %4d x%4d x%4d   ->  %4d\n",  w, h, c, c);
 =======
     fprintf(stderr, "Avgpool Layer: %d x %d x %d image\n", w,h,c);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    fprintf(stderr, "Avgpool Layer: %d x %d x %d image\n", w,h,c);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     avgpool_layer l = {0};
     l.type = AVGPOOL;
     l.batch = batch;
@@ -24,6 +28,7 @@ avgpool_layer make_avgpool_layer(int batch, int w, int h, int c)
     l.output =  calloc(output_size, sizeof(float));
     l.delta =   calloc(output_size, sizeof(float));
 <<<<<<< HEAD
+<<<<<<< HEAD
     l.forward = forward_avgpool_layer;
     l.backward = backward_avgpool_layer;
     #ifdef GPU
@@ -32,6 +37,9 @@ avgpool_layer make_avgpool_layer(int batch, int w, int h, int c)
 =======
     #ifdef GPU
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    #ifdef GPU
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     l.output_gpu  = cuda_make_array(l.output, output_size);
     l.delta_gpu   = cuda_make_array(l.delta, output_size);
     #endif
@@ -46,10 +54,14 @@ void resize_avgpool_layer(avgpool_layer *l, int w, int h)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void forward_avgpool_layer(const avgpool_layer l, network net)
 =======
 void forward_avgpool_layer(const avgpool_layer l, network_state state)
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+void forward_avgpool_layer(const avgpool_layer l, network_state state)
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     int b,i,k;
 
@@ -60,10 +72,14 @@ void forward_avgpool_layer(const avgpool_layer l, network_state state)
             for(i = 0; i < l.h*l.w; ++i){
                 int in_index = i + l.h*l.w*(k + b*l.c);
 <<<<<<< HEAD
+<<<<<<< HEAD
                 l.output[out_index] += net.input[in_index];
 =======
                 l.output[out_index] += state.input[in_index];
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+                l.output[out_index] += state.input[in_index];
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             }
             l.output[out_index] /= l.h*l.w;
         }
@@ -71,10 +87,14 @@ void forward_avgpool_layer(const avgpool_layer l, network_state state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void backward_avgpool_layer(const avgpool_layer l, network net)
 =======
 void backward_avgpool_layer(const avgpool_layer l, network_state state)
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+void backward_avgpool_layer(const avgpool_layer l, network_state state)
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     int b,i,k;
 
@@ -84,10 +104,14 @@ void backward_avgpool_layer(const avgpool_layer l, network_state state)
             for(i = 0; i < l.h*l.w; ++i){
                 int in_index = i + l.h*l.w*(k + b*l.c);
 <<<<<<< HEAD
+<<<<<<< HEAD
                 net.delta[in_index] += l.delta[out_index] / (l.h*l.w);
 =======
                 state.delta[in_index] += l.delta[out_index] / (l.h*l.w);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+                state.delta[in_index] += l.delta[out_index] / (l.h*l.w);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             }
         }
     }

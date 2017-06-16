@@ -1,7 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "darknet.h"
 #include <sys/time.h>
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "network.h"
 #include "detection_layer.h"
 #include "cost_layer.h"
@@ -12,7 +15,10 @@
 #ifdef OPENCV
 #include "opencv2/highgui/highgui_c.h"
 #endif
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 void train_swag(char *cfgfile, char *weightfile)
 {
@@ -20,9 +26,13 @@ void train_swag(char *cfgfile, char *weightfile)
     char *backup_directory = "/home/pjreddie/backup/";
     srand(time(0));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     data_seed = time(0);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    data_seed = time(0);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     char *base = basecfg(cfgfile);
     printf("%s\n", base);
     float avg_loss = -1;

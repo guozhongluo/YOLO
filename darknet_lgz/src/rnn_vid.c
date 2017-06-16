@@ -1,10 +1,13 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "darknet.h"
 
 #ifdef OPENCV
 image get_image_from_stream(CvCapture *cap);
 image ipl_to_image(IplImage* src);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "network.h"
 #include "cost_layer.h"
 #include "utils.h"
@@ -13,7 +16,10 @@ image ipl_to_image(IplImage* src);
 
 #ifdef OPENCV
 #include "opencv2/highgui/highgui_c.h"
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 void reconstruct_picture(network net, float *features, image recon, image update, float rate, float momentum, float lambda, int smooth_size, int iters);
 
@@ -85,9 +91,13 @@ void train_vid_rnn(char *cfgfile, char *weightfile)
     char *backup_directory = "/home/pjreddie/backup/";
     srand(time(0));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     data_seed = time(0);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    data_seed = time(0);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     char *base = basecfg(cfgfile);
     printf("%s\n", base);
     float avg_loss = -1;
@@ -115,12 +125,16 @@ void train_vid_rnn(char *cfgfile, char *weightfile)
         float_pair p = get_rnn_vid_data(extractor, paths, N, batch, steps);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         copy_cpu(net.inputs*net.batch, p.x, 1, net.input, 1);
         copy_cpu(net.truths*net.batch, p.y, 1, net.truth, 1);
         float loss = train_network_datum(net) / (net.batch);
 =======
         float loss = train_network_datum(net, p.x, p.y) / (net.batch);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        float loss = train_network_datum(net, p.x, p.y) / (net.batch);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 
         free(p.x);
@@ -179,10 +193,14 @@ void generate_vid_rnn(char *cfgfile, char *weightfile)
     CvCapture *cap = cvCaptureFromFile("/extra/vid/ILSVRC2015/Data/VID/snippets/val/ILSVRC2015_val_00007030.mp4");
     float *feat;
 <<<<<<< HEAD
+<<<<<<< HEAD
     float *next;
 =======
     float *next = NULL;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    float *next = NULL;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     image last;
     for(i = 0; i < 25; ++i){
         image im = get_image_from_stream(cap);

@@ -1,9 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "darknet.h"
 
 void train_tag(char *cfgfile, char *weightfile, int clear)
 {
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "network.h"
 #include "utils.h"
 #include "parser.h"
@@ -15,7 +18,10 @@ void train_tag(char *cfgfile, char *weightfile, int clear)
 void train_tag(char *cfgfile, char *weightfile, int clear)
 {
     data_seed = time(0);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     srand(time(0));
     float avg_loss = -1;
     char *base = basecfg(cfgfile);
@@ -53,6 +59,7 @@ void train_tag(char *cfgfile, char *weightfile, int clear)
     args.type = TAG_DATA;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     args.angle = net.angle;
     args.exposure = net.exposure;
     args.saturation = net.saturation;
@@ -60,6 +67,8 @@ void train_tag(char *cfgfile, char *weightfile, int clear)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     fprintf(stderr, "%d classes\n", net.outputs);
 
     load_thread = load_data_in_thread(args);

@@ -1,8 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "darknet.h"
 
 #include <math.h>
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "network.h"
 #include "cost_layer.h"
 #include "utils.h"
@@ -12,7 +15,10 @@
 #ifdef OPENCV
 #include "opencv2/highgui/highgui_c.h"
 #endif
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 typedef struct {
     float *x;
@@ -136,9 +142,13 @@ void train_char_rnn(char *cfgfile, char *weightfile, char *filename, int clear, 
 {
     srand(time(0));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     data_seed = time(0);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    data_seed = time(0);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     unsigned char *text = 0;
     int *tokens = 0;
     size_t size;
@@ -166,12 +176,17 @@ void train_char_rnn(char *cfgfile, char *weightfile, char *filename, int clear, 
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     int inputs = net.inputs;
     fprintf(stderr, "Learning Rate: %g, Momentum: %g, Decay: %g, Inputs: %d %d %d\n", net.learning_rate, net.momentum, net.decay, inputs, net.batch, net.time_steps);
 =======
     int inputs = get_network_input_size(net);
     fprintf(stderr, "Learning Rate: %g, Momentum: %g, Decay: %g\n", net.learning_rate, net.momentum, net.decay);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    int inputs = get_network_input_size(net);
+    fprintf(stderr, "Learning Rate: %g, Momentum: %g, Decay: %g\n", net.learning_rate, net.momentum, net.decay);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int batch = net.batch;
     int steps = net.time_steps;
     if(clear) *net.seen = 0;
@@ -196,12 +211,16 @@ void train_char_rnn(char *cfgfile, char *weightfile, char *filename, int clear, 
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         copy_cpu(net.inputs*net.batch, p.x, 1, net.input, 1);
         copy_cpu(net.truths*net.batch, p.y, 1, net.truth, 1);
         float loss = train_network_datum(net) / (batch);
 =======
         float loss = train_network_datum(net, p.x, p.y) / (batch);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        float loss = train_network_datum(net, p.x, p.y) / (batch);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         free(p.x);
         free(p.y);
         if (avg_loss < 0) avg_loss = loss;
@@ -260,10 +279,14 @@ void test_char_rnn(char *cfgfile, char *weightfile, int num, char *seed, float t
         load_weights(&net, weightfile);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     int inputs = net.inputs;
 =======
     int inputs = get_network_input_size(net);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    int inputs = get_network_input_size(net);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     int i, j;
     for(i = 0; i < net.n; ++i) net.layers[i].temperature = temp;
@@ -321,10 +344,14 @@ void test_tactic_rnn(char *cfgfile, char *weightfile, int num, float temp, int r
         load_weights(&net, weightfile);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     int inputs = net.inputs;
 =======
     int inputs = get_network_input_size(net);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    int inputs = get_network_input_size(net);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     int i, j;
     for(i = 0; i < net.n; ++i) net.layers[i].temperature = temp;
@@ -363,10 +390,14 @@ void valid_tactic_rnn(char *cfgfile, char *weightfile, char *seed)
         load_weights(&net, weightfile);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     int inputs = net.inputs;
 =======
     int inputs = get_network_input_size(net);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    int inputs = get_network_input_size(net);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     int count = 0;
     int words = 1;
@@ -419,10 +450,14 @@ void valid_char_rnn(char *cfgfile, char *weightfile, char *seed)
         load_weights(&net, weightfile);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     int inputs = net.inputs;
 =======
     int inputs = get_network_input_size(net);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    int inputs = get_network_input_size(net);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     int count = 0;
     int words = 1;
@@ -464,10 +499,14 @@ void vec_char_rnn(char *cfgfile, char *weightfile, char *seed)
         load_weights(&net, weightfile);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     int inputs = net.inputs;
 =======
     int inputs = get_network_input_size(net);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    int inputs = get_network_input_size(net);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     int c;
     int seed_len = strlen(seed);

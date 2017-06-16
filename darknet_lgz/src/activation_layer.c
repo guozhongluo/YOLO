@@ -22,6 +22,7 @@ layer make_activation_layer(int batch, int inputs, ACTIVATION activation)
     l.delta = calloc(batch*inputs, sizeof(float*));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     l.forward = forward_activation_layer;
     l.backward = backward_activation_layer;
 #ifdef GPU
@@ -31,6 +32,9 @@ layer make_activation_layer(int batch, int inputs, ACTIVATION activation)
 =======
 #ifdef GPU
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+#ifdef GPU
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     l.output_gpu = cuda_make_array(l.output, inputs*batch);
     l.delta_gpu = cuda_make_array(l.delta, inputs*batch);
 #endif
@@ -39,6 +43,7 @@ layer make_activation_layer(int batch, int inputs, ACTIVATION activation)
     return l;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void forward_activation_layer(layer l, network net)
 {
@@ -51,6 +56,8 @@ void backward_activation_layer(layer l, network net)
     gradient_array(l.output, l.outputs*l.batch, l.activation, l.delta);
     copy_cpu(l.outputs*l.batch, l.delta, 1, net.delta, 1);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void forward_activation_layer(layer l, network_state state)
 {
     copy_cpu(l.outputs*l.batch, state.input, 1, l.output, 1);
@@ -61,11 +68,15 @@ void backward_activation_layer(layer l, network_state state)
 {
     gradient_array(l.output, l.outputs*l.batch, l.activation, l.delta);
     copy_cpu(l.outputs*l.batch, l.delta, 1, state.delta, 1);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 #ifdef GPU
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void forward_activation_layer_gpu(layer l, network net)
 {
@@ -78,6 +89,8 @@ void backward_activation_layer_gpu(layer l, network net)
     gradient_array_ongpu(l.output_gpu, l.outputs*l.batch, l.activation, l.delta_gpu);
     copy_ongpu(l.outputs*l.batch, l.delta_gpu, 1, net.delta_gpu, 1);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void forward_activation_layer_gpu(layer l, network_state state)
 {
     copy_ongpu(l.outputs*l.batch, state.input, 1, l.output_gpu, 1);
@@ -88,6 +101,9 @@ void backward_activation_layer_gpu(layer l, network_state state)
 {
     gradient_array_ongpu(l.output_gpu, l.outputs*l.batch, l.activation, l.delta_gpu);
     copy_ongpu(l.outputs*l.batch, l.delta_gpu, 1, state.delta, 1);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 #endif

@@ -2,9 +2,12 @@
 #include "blas.h"
 #include "cuda.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include <float.h>
 #include <math.h>
 #include <stdlib.h>
@@ -15,10 +18,14 @@ softmax_layer make_softmax_layer(int batch, int inputs, int groups)
 {
     assert(inputs%groups == 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
     fprintf(stderr, "softmax                                        %4d\n",  inputs);
 =======
     fprintf(stderr, "Softmax Layer: %d inputs\n", inputs);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    fprintf(stderr, "Softmax Layer: %d inputs\n", inputs);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     softmax_layer l = {0};
     l.type = SOFTMAX;
     l.batch = batch;
@@ -27,6 +34,7 @@ softmax_layer make_softmax_layer(int batch, int inputs, int groups)
     l.outputs = inputs;
     l.output = calloc(inputs*batch, sizeof(float));
     l.delta = calloc(inputs*batch, sizeof(float));
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     l.forward = forward_softmax_layer;
@@ -38,12 +46,16 @@ softmax_layer make_softmax_layer(int batch, int inputs, int groups)
 =======
     #ifdef GPU
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    #ifdef GPU
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     l.output_gpu = cuda_make_array(l.output, inputs*batch); 
     l.delta_gpu = cuda_make_array(l.delta, inputs*batch); 
     #endif
     return l;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void forward_softmax_layer(const softmax_layer l, network net)
 {
@@ -98,6 +110,8 @@ void backward_softmax_layer_gpu(const softmax_layer layer, network net)
 
 #endif
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void softmax_array(float *input, int n, float temp, float *output)
 {
     int i;
@@ -134,4 +148,7 @@ void backward_softmax_layer(const softmax_layer l, network_state state)
     }
 }
 
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592

@@ -1,15 +1,19 @@
 #include "network.h"
 #include "detection_layer.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "region_layer.h"
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "cost_layer.h"
 #include "utils.h"
 #include "parser.h"
 #include "box.h"
 #include "image.h"
 #include "demo.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 //#include <sys/time.h>
 
@@ -20,6 +24,8 @@
 static char **demo_names;
 static image **demo_alphabet;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include <time.h>
 
 #define FRAMES 3
@@ -31,12 +37,16 @@ void convert_detections(float *predictions, int classes, int num, int square, in
 
 static char **demo_names;
 static image *demo_labels;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 static int demo_classes;
 
 static float **probs;
 static box *boxes;
 static network net;
+<<<<<<< HEAD
 <<<<<<< HEAD
 static image buff [3];
 static image buff_letter[3];
@@ -68,6 +78,8 @@ double get_wall_time()
     //return (double)time.tv_sec + (double)time.tv_usec * .000001;
 	return 0.1;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 static image in   ;
 static image in_s ;
 static image det  ;
@@ -90,11 +102,15 @@ void *fetch_in_thread(void *ptr)
     }
     in_s = resize_image(in, net.w, net.h);
     return 0;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 void *detect_in_thread(void *ptr)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     running = 1;
     float nms = .4;
@@ -117,6 +133,8 @@ void *detect_in_thread(void *ptr)
     if (nms > 0) do_nms_obj(boxes, probs, l.w*l.h*l.n, l.classes, nms);
 
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     float nms = .4;
 
     detection_layer l = net.layers[net.n-1];
@@ -129,11 +147,15 @@ void *detect_in_thread(void *ptr)
     free_image(det_s);
     convert_detections(avg, l.classes, l.n, l.sqrt, l.side, 1, 1, demo_thresh, probs, boxes, 0);
     if (nms > 0) do_nms(boxes, probs, l.side*l.side*l.n, l.classes, nms);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     printf("\033[2J");
     printf("\033[1;1H");
     printf("\nFPS:%.1f\n",fps);
     printf("Objects:\n\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
     image display = buff[(buff_index+2) % 3];
     draw_detections(display, demo_detections, demo_thresh, boxes, probs, demo_names, demo_alphabet, demo_classes);
@@ -204,6 +226,8 @@ void demo(char *cfgfile, char *weightfile, float thresh, int cam_index, const ch
     demo_thresh = thresh;
     demo_hier = hier;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     images[demo_index] = det;
     det = images[(demo_index + FRAMES/2 + 1)%FRAMES];
@@ -231,7 +255,10 @@ void demo(char *cfgfile, char *weightfile, float thresh, int cam_index, const ch
     demo_labels = labels;
     demo_classes = classes;
     demo_thresh = thresh;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     printf("Demo\n");
     net = parse_network_cfg(cfgfile);
     if(weightfile){
@@ -239,14 +266,18 @@ void demo(char *cfgfile, char *weightfile, float thresh, int cam_index, const ch
     }
     set_batch_network(&net, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
     pthread_t detect_thread;
     pthread_t fetch_thread;
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     srand(2222222);
 
     if(filename){
+<<<<<<< HEAD
 <<<<<<< HEAD
         printf("video file: %s\n", filename);
         cap = cvCaptureFromFile(filename);
@@ -267,10 +298,16 @@ void demo(char *cfgfile, char *weightfile, float thresh, int cam_index, const ch
     }else{
         cap = cvCaptureFromCAM(cam_index);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        cap = cvCaptureFromFile(filename);
+    }else{
+        cap = cvCaptureFromCAM(cam_index);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     }
 
     if(!cap) error("Couldn't connect to webcam.\n");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     layer l = net.layers[net.n-1];
     demo_detections = l.n*l.w*l.h;
@@ -333,6 +370,8 @@ void demo(char *cfgfile, char *weightfile, float thresh, int cam_index, const ch
 #else
 void demo(char *cfgfile, char *weightfile, float thresh, int cam_index, const char *filename, char **names, int classes, int delay, char *prefix, int avg, float hier, int w, int h, int frames, int fullscreen)
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     detection_layer l = net.layers[net.n-1];
     int j;
 
@@ -423,7 +462,10 @@ void demo(char *cfgfile, char *weightfile, float thresh, int cam_index, const ch
 }
 #else
 void demo(char *cfgfile, char *weightfile, float thresh, int cam_index, const char *filename, char **names, image *labels, int classes, int frame_skip)
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     fprintf(stderr, "Demo needs OpenCV for webcam images.\n");
 }

@@ -1,12 +1,16 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "darknet.h"
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //extern void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filename, int top);
 //extern void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filename, float thresh, float hier_thresh, char *outfile, int fullscreen);
@@ -31,6 +35,8 @@ extern void run_detector(int argc, char **argv);
 //extern void run_super(int argc, char **argv);
 //extern void run_lsd(int argc, char **argv);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "parser.h"
 #include "utils.h"
 #include "cuda.h"
@@ -73,7 +79,10 @@ void change_rate(char *filename, float scale, float add)
 
 
 int gpu_index = -1;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 void average(int argc, char *argv[])
 {
@@ -98,6 +107,7 @@ void average(int argc, char *argv[])
                 int num = l.n*l.c*l.size*l.size;
                 axpy_cpu(l.n, 1, l.biases, 1, out.biases, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
                 axpy_cpu(num, 1, l.weights, 1, out.weights, 1);
                 if(l.batch_normalize){
                     axpy_cpu(l.n, 1, l.scales, 1, out.scales, 1);
@@ -107,6 +117,9 @@ void average(int argc, char *argv[])
 =======
                 axpy_cpu(num, 1, l.filters, 1, out.filters, 1);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+                axpy_cpu(num, 1, l.filters, 1, out.filters, 1);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             }
             if(l.type == CONNECTED){
                 axpy_cpu(l.outputs, 1, l.biases, 1, out.biases, 1);
@@ -121,6 +134,7 @@ void average(int argc, char *argv[])
             int num = l.n*l.c*l.size*l.size;
             scal_cpu(l.n, 1./n, l.biases, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
             scal_cpu(num, 1./n, l.weights, 1);
                 if(l.batch_normalize){
                     scal_cpu(l.n, 1./n, l.scales, 1);
@@ -130,6 +144,9 @@ void average(int argc, char *argv[])
 =======
             scal_cpu(num, 1./n, l.filters, 1);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+            scal_cpu(num, 1./n, l.filters, 1);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         }
         if(l.type == CONNECTED){
             scal_cpu(l.outputs, 1./n, l.biases, 1);
@@ -139,6 +156,7 @@ void average(int argc, char *argv[])
     save_weights(sum, outfile);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void speed(char *cfgfile, int tics)
 {
@@ -159,6 +177,8 @@ void speed(char *cfgfile, int tics)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void operations(char *cfgfile)
 {
     gpu_index = -1;
@@ -168,6 +188,7 @@ void operations(char *cfgfile)
     for(i = 0; i < net.n; ++i){
         layer l = net.layers[i];
         if(l.type == CONVOLUTIONAL){
+<<<<<<< HEAD
 <<<<<<< HEAD
             ops += 2l * l.n * l.size*l.size*l.c * l.out_h*l.out_w;
         } else if(l.type == CONNECTED){
@@ -207,6 +228,8 @@ void oneoff(char *cfgfile, char *weightfile, char *outfile)
 
 void oneoff2(char *cfgfile, char *weightfile, char *outfile, int l)
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             ops += 2 * l.n * l.size*l.size*l.c * l.out_h*l.out_w;
         } else if(l.type == CONNECTED){
             ops += 2 * l.inputs * l.outputs;
@@ -216,11 +239,15 @@ void oneoff2(char *cfgfile, char *weightfile, char *outfile, int l)
 }
 
 void partial(char *cfgfile, char *weightfile, char *outfile, int max)
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     gpu_index = -1;
     network net = parse_network_cfg(cfgfile);
     if(weightfile){
+<<<<<<< HEAD
 <<<<<<< HEAD
         load_weights_upto(&net, weightfile, 0, net.n);
         load_weights_upto(&net, weightfile, l, net.n);
@@ -231,6 +258,8 @@ void partial(char *cfgfile, char *weightfile, char *outfile, int max)
 
 void partial(char *cfgfile, char *weightfile, char *outfile, int max)
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         load_weights_upto(&net, weightfile, max);
     }
     *net.seen = 0;
@@ -238,11 +267,15 @@ void partial(char *cfgfile, char *weightfile, char *outfile, int max)
 }
 
 void stacked(char *cfgfile, char *weightfile, char *outfile)
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     gpu_index = -1;
     network net = parse_network_cfg(cfgfile);
     if(weightfile){
+<<<<<<< HEAD
 <<<<<<< HEAD
         load_weights_upto(&net, weightfile, 0, max);
     }
@@ -251,6 +284,8 @@ void stacked(char *cfgfile, char *weightfile, char *outfile)
 }
 
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         load_weights(&net, weightfile);
     }
     net.seen = 0;
@@ -258,7 +293,10 @@ void stacked(char *cfgfile, char *weightfile, char *outfile)
 }
 
 #include "convolutional_layer.h"
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void rescale_net(char *cfgfile, char *weightfile, char *outfile)
 {
     gpu_index = -1;
@@ -271,10 +309,14 @@ void rescale_net(char *cfgfile, char *weightfile, char *outfile)
         layer l = net.layers[i];
         if(l.type == CONVOLUTIONAL){
 <<<<<<< HEAD
+<<<<<<< HEAD
             rescale_weights(l, 2, -.5);
 =======
             rescale_filters(l, 2, -.5);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+            rescale_filters(l, 2, -.5);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             break;
         }
     }
@@ -293,16 +335,21 @@ void rgbgr_net(char *cfgfile, char *weightfile, char *outfile)
         layer l = net.layers[i];
         if(l.type == CONVOLUTIONAL){
 <<<<<<< HEAD
+<<<<<<< HEAD
             rgbgr_weights(l);
 =======
             rgbgr_filters(l);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+            rgbgr_filters(l);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             break;
         }
     }
     save_weights(net, outfile);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void reset_normalize_net(char *cfgfile, char *weightfile, char *outfile)
 {
@@ -347,6 +394,8 @@ layer normalize_layer(layer l, int n)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void normalize_net(char *cfgfile, char *weightfile, char *outfile)
 {
     gpu_index = -1;
@@ -354,6 +403,7 @@ void normalize_net(char *cfgfile, char *weightfile, char *outfile)
     if(weightfile){
         load_weights(&net, weightfile);
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
     int i;
     for(i = 0; i < net.n; ++i){
@@ -373,6 +423,8 @@ void normalize_net(char *cfgfile, char *weightfile, char *outfile)
             *l.state_h_layer = normalize_layer(*l.state_h_layer, l.state_h_layer->outputs);
             net.layers[i].batch_normalize=1;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int i, j;
     for(i = 0; i < net.n; ++i){
         layer l = net.layers[i];
@@ -384,12 +436,16 @@ void normalize_net(char *cfgfile, char *weightfile, char *outfile)
             }
             net.layers[i].rolling_mean = calloc(l.n, sizeof(float));
             net.layers[i].rolling_variance = calloc(l.n, sizeof(float));
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         }
     }
     save_weights(net, outfile);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void statistics_net(char *cfgfile, char *weightfile)
 {
@@ -426,6 +482,8 @@ void statistics_net(char *cfgfile, char *weightfile)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void denormalize_net(char *cfgfile, char *weightfile, char *outfile)
 {
     gpu_index = -1;
@@ -464,6 +522,7 @@ void denormalize_net(char *cfgfile, char *weightfile, char *outfile)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mkimg(char *cfgfile, char *weightfile, int h, int w, int num, char *prefix)
 {
     network net = load_network(cfgfile, weightfile, 0);
@@ -492,6 +551,8 @@ void mkimg(char *cfgfile, char *weightfile, int h, int w, int num, char *prefix)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void visualize(char *cfgfile, char *weightfile)
 {
     network net = parse_network_cfg(cfgfile);
@@ -510,9 +571,13 @@ int main(int argc, char **argv)
     //test_box();
     //test_convolutional_layer();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     if(argc < 2){
         fprintf(stderr, "usage: %s <function>\n", argv[0]);
         return 0;
@@ -526,6 +591,7 @@ int main(int argc, char **argv)
     gpu_index = -1;
 #else
     if(gpu_index >= 0){
+<<<<<<< HEAD
 <<<<<<< HEAD
         cuda_set_device(gpu_index);
     }
@@ -624,6 +690,8 @@ int main(int argc, char **argv)
     //    fprintf(stderr, "Not an option: %s\n", argv[1]);
     //}
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         cudaError_t status = cudaSetDevice(gpu_index);
         check_error(status);
     }
@@ -690,7 +758,10 @@ int main(int argc, char **argv)
     } else {
         fprintf(stderr, "Not an option: %s\n", argv[1]);
     }
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     return 0;
 }
 

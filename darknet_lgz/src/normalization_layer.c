@@ -1,9 +1,12 @@
 #include "normalization_layer.h"
 #include "blas.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include <stdio.h>
 
 layer make_normalization_layer(int batch, int w, int h, int c, int size, float alpha, float beta, float kappa)
@@ -26,6 +29,7 @@ layer make_normalization_layer(int batch, int w, int h, int c, int size, float a
     layer.inputs = w*h*c;
     layer.outputs = layer.inputs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     layer.forward = forward_normalization_layer;
     layer.backward = backward_normalization_layer;
@@ -36,6 +40,9 @@ layer make_normalization_layer(int batch, int w, int h, int c, int size, float a
 =======
     #ifdef GPU
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    #ifdef GPU
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     layer.output_gpu =  cuda_make_array(layer.output, h * w * c * batch);
     layer.delta_gpu =   cuda_make_array(layer.delta, h * w * c * batch);
     layer.squared_gpu = cuda_make_array(layer.squared, h * w * c * batch);
@@ -71,10 +78,14 @@ void resize_normalization_layer(layer *layer, int w, int h)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void forward_normalization_layer(const layer layer, network net)
 =======
 void forward_normalization_layer(const layer layer, network_state state)
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+void forward_normalization_layer(const layer layer, network_state state)
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     int k,b;
     int w = layer.w;
@@ -86,10 +97,14 @@ void forward_normalization_layer(const layer layer, network_state state)
         float *squared = layer.squared + w*h*c*b;
         float *norms   = layer.norms + w*h*c*b;
 <<<<<<< HEAD
+<<<<<<< HEAD
         float *input   = net.input + w*h*c*b;
 =======
         float *input   = state.input + w*h*c*b;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        float *input   = state.input + w*h*c*b;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         pow_cpu(w*h*c, 2, input, 1, squared, 1);
 
         const_cpu(w*h, layer.kappa, norms, 1);
@@ -107,16 +122,22 @@ void forward_normalization_layer(const layer layer, network_state state)
     }
     pow_cpu(w*h*c*layer.batch, -layer.beta, layer.norms, 1, layer.output, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
     mul_cpu(w*h*c*layer.batch, net.input, 1, layer.output, 1);
 }
 
 void backward_normalization_layer(const layer layer, network net)
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     mul_cpu(w*h*c*layer.batch, state.input, 1, layer.output, 1);
 }
 
 void backward_normalization_layer(const layer layer, network_state state)
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     // TODO This is approximate ;-)
     // Also this should add in to delta instead of overwritting.
@@ -125,6 +146,7 @@ void backward_normalization_layer(const layer layer, network_state state)
     int h = layer.h;
     int c = layer.c;
 <<<<<<< HEAD
+<<<<<<< HEAD
     pow_cpu(w*h*c*layer.batch, -layer.beta, layer.norms, 1, net.delta, 1);
     mul_cpu(w*h*c*layer.batch, layer.delta, 1, net.delta, 1);
 }
@@ -132,13 +154,18 @@ void backward_normalization_layer(const layer layer, network_state state)
 #ifdef GPU
 void forward_normalization_layer_gpu(const layer layer, network net)
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     pow_cpu(w*h*c*layer.batch, -layer.beta, layer.norms, 1, state.delta, 1);
     mul_cpu(w*h*c*layer.batch, layer.delta, 1, state.delta, 1);
 }
 
 #ifdef GPU
 void forward_normalization_layer_gpu(const layer layer, network_state state)
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     int k,b;
     int w = layer.w;
@@ -150,10 +177,14 @@ void forward_normalization_layer_gpu(const layer layer, network_state state)
         float *squared = layer.squared_gpu + w*h*c*b;
         float *norms   = layer.norms_gpu + w*h*c*b;
 <<<<<<< HEAD
+<<<<<<< HEAD
         float *input   = net.input_gpu + w*h*c*b;
 =======
         float *input   = state.input + w*h*c*b;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        float *input   = state.input + w*h*c*b;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         pow_ongpu(w*h*c, 2, input, 1, squared, 1);
 
         const_ongpu(w*h, layer.kappa, norms, 1);
@@ -171,16 +202,22 @@ void forward_normalization_layer_gpu(const layer layer, network_state state)
     }
     pow_ongpu(w*h*c*layer.batch, -layer.beta, layer.norms_gpu, 1, layer.output_gpu, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
     mul_ongpu(w*h*c*layer.batch, net.input_gpu, 1, layer.output_gpu, 1);
 }
 
 void backward_normalization_layer_gpu(const layer layer, network net)
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     mul_ongpu(w*h*c*layer.batch, state.input, 1, layer.output_gpu, 1);
 }
 
 void backward_normalization_layer_gpu(const layer layer, network_state state)
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     // TODO This is approximate ;-)
 
@@ -188,11 +225,16 @@ void backward_normalization_layer_gpu(const layer layer, network_state state)
     int h = layer.h;
     int c = layer.c;
 <<<<<<< HEAD
+<<<<<<< HEAD
     pow_ongpu(w*h*c*layer.batch, -layer.beta, layer.norms_gpu, 1, net.delta_gpu, 1);
     mul_ongpu(w*h*c*layer.batch, layer.delta_gpu, 1, net.delta_gpu, 1);
 =======
     pow_ongpu(w*h*c*layer.batch, -layer.beta, layer.norms_gpu, 1, state.delta, 1);
     mul_ongpu(w*h*c*layer.batch, layer.delta_gpu, 1, state.delta, 1);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    pow_ongpu(w*h*c*layer.batch, -layer.beta, layer.norms_gpu, 1, state.delta, 1);
+    mul_ongpu(w*h*c*layer.batch, layer.delta_gpu, 1, state.delta, 1);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 #endif

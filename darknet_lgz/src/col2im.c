@@ -17,10 +17,13 @@ void col2im_cpu(float* data_col,
 {
     int c,h,w;
 <<<<<<< HEAD
+<<<<<<< HEAD
     int height_col = (height + 2*pad - ksize) / stride + 1;
     int width_col = (width + 2*pad - ksize) / stride + 1;
 
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int height_col = (height - ksize) / stride + 1;
     int width_col = (width - ksize) / stride + 1;
     if (pad){
@@ -28,7 +31,10 @@ void col2im_cpu(float* data_col,
         width_col = 1 + (width-1) / stride;
         pad = ksize/2;
     }
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int channels_col = channels * ksize * ksize;
     for (c = 0; c < channels_col; ++c) {
         int w_offset = c % ksize;

@@ -2,9 +2,12 @@
 #include "utils.h"
 #include "blas.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "cuda.h"
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include <stdio.h>
 #include <math.h>
 
@@ -28,6 +31,7 @@ float get_color(int c, int x, int max)
     return r;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 image mask_to_rgb(image mask)
 {
@@ -109,13 +113,18 @@ void draw_label(image a, int r, int c, image label, const float *rgb)
     int w = label.w;
     int h = label.h;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void draw_label(image a, int r, int c, image label, const float *rgb)
 {
     float ratio = (float) label.w / label.h;
     int h = label.h;
     int w = ratio * h;
     image rl = resize_image(label, w, h);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     if (r - h >= 0) r = r - h;
 
     int i, j, k;
@@ -123,18 +132,26 @@ void draw_label(image a, int r, int c, image label, const float *rgb)
         for(i = 0; i < w && i + c < a.w; ++i){
             for(k = 0; k < label.c; ++k){
 <<<<<<< HEAD
+<<<<<<< HEAD
                 float val = get_pixel(label, i, j, k);
 =======
                 float val = get_pixel(rl, i, j, k);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+                float val = get_pixel(rl, i, j, k);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                 set_pixel(a, i+c, j+r, k, rgb[k] * val);
             }
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     free_image(rl);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    free_image(rl);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 void draw_box(image a, int x1, int y1, int x2, int y2, float r, float g, float b)
@@ -195,6 +212,7 @@ void draw_bbox(image a, box bbox, int w, float r, float g, float b)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 image **load_alphabet()
 {
     int i, j;
@@ -215,6 +233,9 @@ void draw_detections(image im, int num, float thresh, box *boxes, float **probs,
 =======
 void draw_detections(image im, int num, float thresh, box *boxes, float **probs, char **names, image *labels, int classes)
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+void draw_detections(image im, int num, float thresh, box *boxes, float **probs, char **names, image *labels, int classes)
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     int i;
 
@@ -222,6 +243,7 @@ void draw_detections(image im, int num, float thresh, box *boxes, float **probs,
         int class = max_index(probs[i], classes);
         float prob = probs[i][class];
         if(prob > thresh){
+<<<<<<< HEAD
 <<<<<<< HEAD
 
             int width = im.h * .012;
@@ -235,21 +257,29 @@ void draw_detections(image im, int num, float thresh, box *boxes, float **probs,
             printf("%s: %.0f%%\n", names[class], prob*100);
             int offset = class*123457 % classes;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             int width = pow(prob, 1./2.)*10+1;
             width = 8;
             printf("%s: %.0f%%\n", names[class], prob*100);
             int offset = class*1 % classes;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             float red = get_color(2,offset,classes);
             float green = get_color(1,offset,classes);
             float blue = get_color(0,offset,classes);
             float rgb[3];
+<<<<<<< HEAD
 <<<<<<< HEAD
 
             //width = prob*20+2;
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             rgb[0] = red;
             rgb[1] = green;
             rgb[2] = blue;
@@ -267,6 +297,7 @@ void draw_detections(image im, int num, float thresh, box *boxes, float **probs,
 
             draw_box_width(im, left, top, right, bot, width, red, green, blue);
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (alphabet) {
                 image label = get_label(alphabet, names[class], (im.h*.03)/10);
                 draw_label(im, top + width, left, label, rgb);
@@ -275,6 +306,9 @@ void draw_detections(image im, int num, float thresh, box *boxes, float **probs,
 =======
             if (labels) draw_label(im, top + width, left, labels[class], rgb);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+            if (labels) draw_label(im, top + width, left, labels[class], rgb);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         }
     }
 }
@@ -348,6 +382,7 @@ image image_distance(image a, image b)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ghost_image(image source, image dest, int dx, int dy)
 {
     int x,y,k;
@@ -369,6 +404,8 @@ void ghost_image(image source, image dest, int dx, int dy)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void embed_image(image source, image dest, int dx, int dy)
 {
     int x,y,k;
@@ -409,6 +446,7 @@ void constrain_image(image im)
 void normalize_image(image p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     int i;
     float min = 9999999;
     float max = -999999;
@@ -431,6 +469,8 @@ void normalize_image2(image p)
 {
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     float *min = calloc(p.c, sizeof(float));
     float *max = calloc(p.c, sizeof(float));
     int i,j;
@@ -459,6 +499,7 @@ void normalize_image2(image p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void copy_image_into(image src, image dest)
 {
     memcpy(dest.data, src.data, src.h*src.w*src.c*sizeof(float));
@@ -466,6 +507,8 @@ void copy_image_into(image src, image dest)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 image copy_image(image p)
 {
     image copy = p;
@@ -486,18 +529,24 @@ void rgbgr_image(image im)
 
 #ifdef OPENCV
 <<<<<<< HEAD
+<<<<<<< HEAD
 void show_image_cv(image p, const char *name, IplImage *disp)
 {
     int x,y,k;
     if(p.c == 3) rgbgr_image(p);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void show_image_cv(image p, const char *name)
 {
     int x,y,k;
     image copy = copy_image(p);
     constrain_image(copy);
     if(p.c == 3) rgbgr_image(copy);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     //normalize_image(copy);
 
     char buff[256];
@@ -505,9 +554,13 @@ void show_image_cv(image p, const char *name)
     sprintf(buff, "%s", name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     IplImage *disp = cvCreateImage(cvSize(p.w,p.h), IPL_DEPTH_8U, p.c);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    IplImage *disp = cvCreateImage(cvSize(p.w,p.h), IPL_DEPTH_8U, p.c);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int step = disp->widthStep;
     cvNamedWindow(buff, CV_WINDOW_NORMAL); 
     //cvMoveWindow(buff, 100*(windows%10) + 200*(windows/10), 100*(windows%10));
@@ -516,12 +569,15 @@ void show_image_cv(image p, const char *name)
         for(x = 0; x < p.w; ++x){
             for(k= 0; k < p.c; ++k){
 <<<<<<< HEAD
+<<<<<<< HEAD
                 disp->imageData[y*step + x*p.c + k] = (unsigned char)(get_pixel(p,x,y,k)*255);
             }
         }
     }
     if(0){
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                 disp->imageData[y*step + x*p.c + k] = (unsigned char)(get_pixel(copy,x,y,k)*255);
             }
         }
@@ -529,7 +585,10 @@ void show_image_cv(image p, const char *name)
     free_image(copy);
     if(0){
         //if(disp->height < 448 || disp->width < 448 || disp->height > 1000){
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         int w = 448;
         int h = w*p.h/p.w;
         if(h > 1000){
@@ -542,6 +601,7 @@ void show_image_cv(image p, const char *name)
         cvReleaseImage(&buffer);
     }
     cvShowImage(buff, disp);
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 #endif
@@ -848,6 +908,8 @@ image crop_image(image im, int dx, int dy, int w, int h)
     return cropped;
 }
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     cvReleaseImage(&disp);
     }
 #endif
@@ -1021,7 +1083,10 @@ image crop_image(image im, int dx, int dy, int w, int h)
         }
         return cropped;
     }
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 int best_3d_shift_r(image a, image b, int min, int max)
 {
@@ -1056,10 +1121,14 @@ int best_3d_shift(image a, image b, int min, int max)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void composite_3d(char *f1, char *f2, char *out, int delta)
 =======
 void composite_3d(char *f1, char *f2, char *out)
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+void composite_3d(char *f1, char *f2, char *out)
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     if(!out) out = "out";
     image a = load_image(f1, 0,0,0);
@@ -1072,10 +1141,14 @@ void composite_3d(char *f1, char *f2, char *out)
     float d2 = dist_array(c2.data, a.data, a.w*a.h*a.c, 100);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     if(d2 < d1 && 0){
 =======
     if(d2 < d1){
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    if(d2 < d1){
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         image swap = a;
         a = b;
         b = swap;
@@ -1087,10 +1160,14 @@ void composite_3d(char *f1, char *f2, char *out)
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     image c = crop_image(b, delta, shift, a.w, a.h);
 =======
     image c = crop_image(b, 0, shift, a.w, a.h);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    image c = crop_image(b, 0, shift, a.w, a.h);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int i;
     for(i = 0; i < c.w*c.h; ++i){
         c.data[i] = a.data[i];
@@ -1102,6 +1179,7 @@ void composite_3d(char *f1, char *f2, char *out)
 #endif
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void letterbox_image_into(image im, int w, int h, image boxed)
 {
@@ -1158,6 +1236,8 @@ image resize_max(image im, int max)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 image resize_min(image im, int min)
 {
     int w = im.w;
@@ -1174,6 +1254,7 @@ image resize_min(image im, int min)
     return resized;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 image random_crop_image(image im, int w, int h)
 {
@@ -1215,6 +1296,8 @@ image random_augment_image(image im, float angle, float aspect, int low, int hig
     augment_args a = random_augment_args(im, angle, aspect, low, high, w, h);
     image crop = rotate_crop_image(im, a.rad, a.scale, a.w, a.h, a.dx, a.dy, a.aspect);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 image random_crop_image(image im, int low, int high, int size)
 {
     int r = rand_int(low, high);
@@ -1224,7 +1307,10 @@ image random_crop_image(image im, int low, int high, int size)
     image crop = crop_image(resized, dx, dy, size, size);
 
     if(resized.data != im.data) free_image(resized);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     return crop;
 }
 
@@ -1238,6 +1324,7 @@ float three_way_min(float a, float b, float c)
     return (a < b) ? ( (a < c) ? a : c) : ( (b < c) ? b : c) ;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void yuv_to_rgb(image im)
 {
@@ -1287,6 +1374,8 @@ void rgb_to_yuv(image im)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 // http://www.cs.rit.edu/~ncs/color/t_convert.html
 void rgb_to_hsv(image im)
 {
@@ -1306,10 +1395,14 @@ void rgb_to_hsv(image im)
             if(max == 0){
                 s = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 h = 0;
 =======
                 h = -1;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+                h = -1;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             }else{
                 s = delta/max;
                 if(r == max){
@@ -1321,9 +1414,12 @@ void rgb_to_hsv(image im)
                 }
                 if (h < 0) h += 6;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 h = h/6.;
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             }
             set_pixel(im, i, j, 0, h);
             set_pixel(im, i, j, 1, s);
@@ -1342,10 +1438,14 @@ void hsv_to_rgb(image im)
     for(j = 0; j < im.h; ++j){
         for(i = 0; i < im.w; ++i){
 <<<<<<< HEAD
+<<<<<<< HEAD
             h = 6 * get_pixel(im, i , j, 0);
 =======
             h = get_pixel(im, i , j, 0);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+            h = get_pixel(im, i , j, 0);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             s = get_pixel(im, i , j, 1);
             v = get_pixel(im, i , j, 2);
             if (s == 0) {
@@ -1378,6 +1478,7 @@ void hsv_to_rgb(image im)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void grayscale_image_3c(image im)
 {
     assert(im.c == 3);
@@ -1398,16 +1499,22 @@ void grayscale_image_3c(image im)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 image grayscale_image(image im)
 {
     assert(im.c == 3);
     int i, j, k;
     image gray = make_image(im.w, im.h, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
     float scale[] = {0.299, 0.587, 0.114};
 =======
     float scale[] = {0.587, 0.299, 0.114};
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    float scale[] = {0.587, 0.299, 0.114};
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     for(k = 0; k < im.c; ++k){
         for(j = 0; j < im.h; ++j){
             for(i = 0; i < im.w; ++i){
@@ -1458,6 +1565,7 @@ void scale_image_channel(image im, int c, float v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void translate_image_channel(image im, int c, float v)
 {
     int i, j;
@@ -1472,6 +1580,8 @@ void translate_image_channel(image im, int c, float v)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 image binarize_image(image im)
 {
     image c = copy_image(im);
@@ -1492,6 +1602,7 @@ void saturate_image(image im, float sat)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void hue_image(image im, float hue)
 {
     rgb_to_hsv(im);
@@ -1507,6 +1618,8 @@ void hue_image(image im, float hue)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void exposure_image(image im, float sat)
 {
     rgb_to_hsv(im);
@@ -1515,6 +1628,7 @@ void exposure_image(image im, float sat)
     constrain_image(im);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void distort_image(image im, float hue, float sat, float val)
 {
@@ -1541,6 +1655,8 @@ void random_distort_image(image im, float hue, float saturation, float exposure)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void saturate_exposure_image(image im, float sat, float exposure)
 {
     rgb_to_hsv(im);
@@ -1551,7 +1667,10 @@ void saturate_exposure_image(image im, float sat, float exposure)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 /*
    image saturate_image(image im, float sat)
    {
@@ -1569,7 +1688,10 @@ void saturate_exposure_image(image im, float sat, float exposure)
    }
  */
 
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 float bilinear_interpolate(image im, float x, float y, int c)
 {
     int ix = (int) floorf(x);
@@ -1630,9 +1752,13 @@ image resize_image(image im, int w, int h)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 #include "cuda.h"
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+#include "cuda.h"
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 void test_resize(char *filename)
 {
@@ -1641,6 +1767,7 @@ void test_resize(char *filename)
     printf("L2 Norm: %f\n", mag);
     image gray = grayscale_image(im);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     image c1 = copy_image(im);
     image c2 = copy_image(im);
@@ -1685,6 +1812,8 @@ void test_resize(char *filename)
 }
 
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     image sat2 = copy_image(im);
     saturate_image(sat2, 2);
 
@@ -1779,7 +1908,10 @@ image load_image_cv(char *filename, int channels)
 
 #endif
 
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 image load_image_stb(char *filename, int channels)
 {
@@ -1844,6 +1976,7 @@ float get_pixel(image m, int x, int y, int c)
 float get_pixel_extend(image m, int x, int y, int c)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     if(x < 0) x = 0;
     if(x >= m.w) x = m.w-1;
     if(y < 0) y = 0;
@@ -1852,14 +1985,20 @@ float get_pixel_extend(image m, int x, int y, int c)
 =======
     if(x < 0 || x >= m.w || y < 0 || y >= m.h || c < 0 || c >= m.c) return 0;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    if(x < 0 || x >= m.w || y < 0 || y >= m.h || c < 0 || c >= m.c) return 0;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     return get_pixel(m, x, y, c);
 }
 void set_pixel(image m, int x, int y, int c, float val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (x < 0 || y < 0 || c < 0 || x >= m.w || y >= m.h || c >= m.c) return;
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     assert(x < m.w && y < m.h && c < m.c);
     m.data[c*m.h*m.w + y*m.w + x] = val;
 }
@@ -1979,19 +2118,26 @@ void show_images(image *ims, int n, char *window)
      */
     normalize_image(m);
 <<<<<<< HEAD
+<<<<<<< HEAD
     save_image(m, window);
     show_image(m, window);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     image sized = resize_image(m, m.w, m.h);
     save_image(sized, window);
     show_image(sized, window);
     free_image(sized);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     free_image(m);
 }
 
 void free_image(image m)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     if(m.data){
         free(m.data);
@@ -1999,4 +2145,7 @@ void free_image(image m)
 =======
     free(m.data);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    free(m.data);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }

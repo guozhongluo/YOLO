@@ -9,9 +9,13 @@ extern "C" {
 
 #include "network.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 #include "image.h"
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+#include "image.h"
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "data.h"
 #include "utils.h"
 #include "parser.h"
@@ -23,17 +27,23 @@ extern "C" {
 #include "crnn_layer.h"
 #include "detection_layer.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "region_layer.h"
 #include "convolutional_layer.h"
 #include "activation_layer.h"
 #include "maxpool_layer.h"
 #include "reorg_layer.h"
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "convolutional_layer.h"
 #include "activation_layer.h"
 #include "deconvolutional_layer.h"
 #include "maxpool_layer.h"
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "avgpool_layer.h"
 #include "normalization_layer.h"
 #include "batchnorm_layer.h"
@@ -47,12 +57,15 @@ extern "C" {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void forward_network_gpu(network net)
 {
     int i;
     for(i = 0; i < net.n; ++i){
         net.index = i;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 float * get_network_output_gpu_layer(network net, int i);
 float * get_network_delta_gpu_layer(network net, int i);
 float * get_network_output_gpu(network net);
@@ -63,11 +76,15 @@ void forward_network_gpu(network net, network_state state)
     int i;
     for(i = 0; i < net.n; ++i){
         state.index = i;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         layer l = net.layers[i];
         if(l.delta_gpu){
             fill_ongpu(l.outputs * l.batch, 0, l.delta_gpu, 1);
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
         l.forward_gpu(l, net);
         net.input_gpu = l.output_gpu;
@@ -100,6 +117,8 @@ void backward_network_gpu(network net)
         net.index = i;
         l.backward_gpu(l, net);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         if(l.type == CONVOLUTIONAL){
             forward_convolutional_layer_gpu(l, state);
         } else if(l.type == DECONVOLUTIONAL){
@@ -197,26 +216,35 @@ void backward_network_gpu(network net, network_state state)
         } else if(l.type == SHORTCUT){
             backward_shortcut_layer_gpu(l, state);
         }
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     }
 }
 
 void update_network_gpu(network net)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     cuda_set_device(net.gpu_index);
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int i;
     int update_batch = net.batch*net.subdivisions;
     float rate = get_current_rate(net);
     for(i = 0; i < net.n; ++i){
         layer l = net.layers[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
         l.t = get_current_batch(net);
         if(l.update_gpu){
             l.update_gpu(l, update_batch, rate*l.learning_rate_scale, net.momentum, net.decay);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         if(l.type == CONVOLUTIONAL){
             update_convolutional_layer_gpu(l, update_batch, rate, net.momentum, net.decay);
         } else if(l.type == DECONVOLUTIONAL){
@@ -231,11 +259,15 @@ void update_network_gpu(network net)
             update_crnn_layer_gpu(l, update_batch, rate, net.momentum, net.decay);
         } else if(l.type == LOCAL){
             update_local_layer_gpu(l, update_batch, rate, net.momentum, net.decay);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         }
     }
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void harmless_update_network_gpu(network net)
 {
@@ -264,6 +296,8 @@ float train_network_datum_gpu(network net)
 
     float error = *net.cost;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 float train_network_datum_gpu(network net, float *x, float *y)
 {
     network_state state;
@@ -286,12 +320,16 @@ float train_network_datum_gpu(network net, float *x, float *y)
     forward_network_gpu(net, state);
     backward_network_gpu(net, state);
     float error = get_network_cost(net);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     if (((*net.seen) / net.batch) % net.subdivisions == 0) update_network_gpu(net);
 
     return error;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 typedef struct {
     network net;
@@ -570,6 +608,8 @@ void pull_network_output(network net)
     layer l = get_network_output_layer(net);
     cuda_pull_array(l.output_gpu, l.output, l.outputs*l.batch);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 float *get_network_output_layer_gpu(network net, int i)
 {
     layer l = net.layers[i];
@@ -582,11 +622,15 @@ float *get_network_output_gpu(network net)
     int i;
     for(i = net.n-1; i > 0; --i) if(net.layers[i].type != COST) break;
     return get_network_output_layer_gpu(net, i);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 float *network_predict_gpu(network net, float *input)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     cuda_set_device(net.gpu_index);
     cuda_push_array(net.input_gpu, input, net.inputs*net.batch);
@@ -595,6 +639,8 @@ float *network_predict_gpu(network net, float *input)
     forward_network_gpu(net);
     return net.output;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int size = get_network_input_size(net) * net.batch;
     network_state state;
     state.index = 0;
@@ -607,6 +653,9 @@ float *network_predict_gpu(network net, float *input)
     float *out = get_network_output_gpu(net);
     cuda_free(state.input);
     return out;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 

@@ -3,18 +3,24 @@
 #include <pthread.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "darknet.h"
 #include "matrix.h"
 #include "list.h"
 #include "image.h"
 #include "tree.h"
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "matrix.h"
 #include "list.h"
 #include "image.h"
 
 extern unsigned int data_seed;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 static inline float distance_from_edge(int x, int max)
 {
@@ -27,9 +33,12 @@ static inline float distance_from_edge(int x, int max)
     return dist;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 void load_data_blocking(load_args args);
 
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 typedef struct{
     int w, h;
@@ -77,11 +86,15 @@ typedef struct{
 void free_data(data d);
 
 pthread_t load_data_in_thread(load_args args);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 void print_letters(float *pred, int n);
 data load_data_captcha(char **paths, int n, int m, int k, int w, int h);
 data load_data_captcha_encode(char **paths, int n, int m, int w, int h);
+<<<<<<< HEAD
 <<<<<<< HEAD
 data load_data_detection(int n, char **paths, int m, int w, int h, int boxes, int classes, float jitter, float hue, float saturation, float exposure);
 data load_data_tag(char **paths, int n, int m, int k, int min, int max, int size, float angle, float aspect, float hue, float saturation, float exposure);
@@ -98,6 +111,8 @@ void get_random_batch(data d, int n, float *X, float *y);
 data get_data_part(data d, int part, int total);
 data get_random_data(data d, int num);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 data load_data(char **paths, int n, int m, char **labels, int k, int w, int h);
 data load_data_detection(int n, char **paths, int m, int w, int h, int boxes, int classes, float jitter);
 data load_data_tag(char **paths, int n, int m, int k, int min, int max, int size);
@@ -116,7 +131,10 @@ char **get_labels(char *filename);
 void get_random_batch(data d, int n, float *X, float *y);
 data get_random_data(data d, int num);
 void get_next_batch(data d, int n, int offset, float *X, float *y);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 data load_categorical_data_csv(char *filename, int target, int k);
 void normalize_data_rows(data d);
 void scale_data_rows(data d, float s);
@@ -124,10 +142,14 @@ void translate_data_rows(data d, float s);
 void randomize_data(data d);
 data *split_data(data d, int part, int total);
 <<<<<<< HEAD
+<<<<<<< HEAD
 data concat_datas(data *d, int n);
 =======
 data concat_data(data d1, data d2);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+data concat_data(data d1, data d2);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void fill_truth(char *path, char **labels, int k, float *truth);
 
 #endif

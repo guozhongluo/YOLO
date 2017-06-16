@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "darknet.h"
 
 //#include <sys/time.h>
@@ -42,6 +43,8 @@ void train_classifier(char *datacfg, char *cfgfile, char *weightfile, int *gpus,
 
     printf("Learning Rate: %g, Momentum: %g, Decay: %g\n", net.learning_rate, net.momentum, net.decay);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "network.h"
 #include "utils.h"
 #include "parser.h"
@@ -97,7 +100,10 @@ void train_classifier(char *datacfg, char *cfgfile, char *weightfile, int clear)
     printf("Learning Rate: %g, Momentum: %g, Decay: %g\n", net.learning_rate, net.momentum, net.decay);
     int imgs = net.batch*net.subdivisions;
 
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     list *options = read_data_cfg(datacfg);
 
     char *backup_directory = option_find_str(options, "backup", "/backup/");
@@ -112,15 +118,22 @@ void train_classifier(char *datacfg, char *cfgfile, char *weightfile, int clear)
     int N = plist->size;
     clock_t time;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     pthread_t load_thread;
     data train;
     data buffer;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    pthread_t load_thread;
+    data train;
+    data buffer;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     load_args args = {0};
     args.w = net.w;
     args.h = net.h;
+<<<<<<< HEAD
 <<<<<<< HEAD
     args.threads = 32;
     args.hierarchy = net.hierarchy;
@@ -137,6 +150,11 @@ void train_classifier(char *datacfg, char *cfgfile, char *weightfile, int clear)
     args.min = net.min_crop;
     args.max = net.max_crop;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+
+    args.min = net.min_crop;
+    args.max = net.max_crop;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     args.size = net.w;
 
     args.paths = paths;
@@ -144,6 +162,7 @@ void train_classifier(char *datacfg, char *cfgfile, char *weightfile, int clear)
     args.n = imgs;
     args.m = N;
     args.labels = labels;
+<<<<<<< HEAD
 <<<<<<< HEAD
     args.type = CLASSIFICATION_DATA;
 
@@ -175,6 +194,8 @@ void train_classifier(char *datacfg, char *cfgfile, char *weightfile, int clear)
         loss = train_network(net, train);
 #endif
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     args.d = &buffer;
     args.type = CLASSIFICATION_DATA;
 
@@ -199,7 +220,10 @@ void train_classifier(char *datacfg, char *cfgfile, char *weightfile, int clear)
          */
 
         float loss = train_network(net, train);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         if(avg_loss == -1) avg_loss = loss;
         avg_loss = avg_loss*.9 + loss*.1;
         printf("%d, %.3f: %f, %f avg, %f rate, %lf seconds, %d images\n", get_current_batch(net), (float)(*net.seen)/N, loss, avg_loss, get_current_rate(net), sec(clock()-time), *net.seen);
@@ -211,10 +235,14 @@ void train_classifier(char *datacfg, char *cfgfile, char *weightfile, int clear)
             save_weights(net, buff);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(get_current_batch(net)%1000 == 0){
 =======
         if(get_current_batch(net)%100 == 0){
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        if(get_current_batch(net)%100 == 0){
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             char buff[256];
             sprintf(buff, "%s/%s.backup",backup_directory,base);
             save_weights(net, buff);
@@ -225,10 +253,15 @@ void train_classifier(char *datacfg, char *cfgfile, char *weightfile, int clear)
     save_weights(net, buff);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     pthread_join(load_thread, 0);
     free_data(buffer);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    pthread_join(load_thread, 0);
+    free_data(buffer);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     free_network(net);
     free_ptrs((void**)labels, classes);
     free_ptrs((void**)paths, plist->size);
@@ -236,6 +269,7 @@ void train_classifier(char *datacfg, char *cfgfile, char *weightfile, int clear)
     free(base);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /*
@@ -352,6 +386,9 @@ void validate_classifier_crop(char *datacfg, char *filename, char *weightfile)
 =======
 void validate_classifier(char *datacfg, char *filename, char *weightfile)
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+void validate_classifier(char *datacfg, char *filename, char *weightfile)
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     int i = 0;
     network net = parse_network_cfg(filename);
@@ -475,9 +512,12 @@ void validate_classifier_10(char *datacfg, char *filename, char *weightfile)
         for(j = 0; j < 10; ++j){
             float *p = network_predict(net, images[j].data);
 <<<<<<< HEAD
+<<<<<<< HEAD
             if(net.hierarchy) hierarchy_predictions(p, net.outputs, net.hierarchy, 1, 1);
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             axpy_cpu(classes, 1, p, 1, pred, 1);
             free_image(images[j]);
         }
@@ -539,9 +579,12 @@ void validate_classifier_full(char *datacfg, char *filename, char *weightfile)
         //cvWaitKey(0);
         float *pred = network_predict(net, resized.data);
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(net.hierarchy) hierarchy_predictions(pred, net.outputs, net.hierarchy, 1, 1);
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
         free_image(im);
         free_image(resized);
@@ -571,10 +614,13 @@ void validate_classifier_single(char *datacfg, char *filename, char *weightfile)
 
     char *label_list = option_find_str(options, "labels", "data/labels.list");
 <<<<<<< HEAD
+<<<<<<< HEAD
     char *leaf_list = option_find_str(options, "leaves", 0);
     if(leaf_list) change_leaves(net.hierarchy, leaf_list);
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     char *valid_list = option_find_str(options, "valid", "data/train.list");
     int classes = option_find_int(options, "classes", 2);
     int topk = option_find_int(options, "top", 1);
@@ -607,9 +653,12 @@ void validate_classifier_single(char *datacfg, char *filename, char *weightfile)
         //cvWaitKey(0);
         float *pred = network_predict(net, crop.data);
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(net.hierarchy) hierarchy_predictions(pred, net.outputs, net.hierarchy, 1, 1);
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
         if(resized.data != im.data) free_image(resized);
         free_image(im);
@@ -645,10 +694,14 @@ void validate_classifier_multi(char *datacfg, char *filename, char *weightfile)
     char **labels = get_labels(label_list);
     list *plist = get_paths(valid_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
     int scales[] = {224, 288, 320, 352, 384};
 =======
     int scales[] = {192, 224, 288, 320, 352};
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    int scales[] = {192, 224, 288, 320, 352};
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int nscales = sizeof(scales)/sizeof(scales[0]);
 
     char **paths = (char **)list_to_array(plist);
@@ -675,9 +728,12 @@ void validate_classifier_multi(char *datacfg, char *filename, char *weightfile)
             resize_network(&net, r.w, r.h);
             float *p = network_predict(net, r.data);
 <<<<<<< HEAD
+<<<<<<< HEAD
             if(net.hierarchy) hierarchy_predictions(p, net.outputs, net.hierarchy, 1 , 1);
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             axpy_cpu(classes, 1, p, 1, pred, 1);
             flip_image(r);
             p = network_predict(net, r.data);
@@ -697,10 +753,14 @@ void validate_classifier_multi(char *datacfg, char *filename, char *weightfile)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void try_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filename, int layer_num)
 =======
 void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filename)
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filename)
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     network net = parse_network_cfg(cfgfile);
     if(weightfile){
@@ -721,6 +781,7 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
     int *indexes = calloc(top, sizeof(int));
     char buff[256];
     char *input = buff;
+<<<<<<< HEAD
 <<<<<<< HEAD
     while(1){
         if(filename){
@@ -805,6 +866,8 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
     char *input = buff;
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int size = net.w;
     while(1){
         if(filename){
@@ -820,14 +883,19 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
         image r = resize_min(im, size);
         resize_network(&net, r.w, r.h);
 <<<<<<< HEAD
+<<<<<<< HEAD
         //printf("%d %d\n", r.w, r.h);
 =======
         printf("%d %d\n", r.w, r.h);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        printf("%d %d\n", r.w, r.h);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
         float *X = r.data;
         time=clock();
         float *predictions = network_predict(net, X);
+<<<<<<< HEAD
 <<<<<<< HEAD
         if(net.hierarchy) hierarchy_predictions(predictions, net.outputs, net.hierarchy, 1, 1);
         top_k(predictions, net.outputs, top, indexes);
@@ -838,12 +906,17 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
             //else printf("%s: %f\n",names[index], predictions[index]);
             printf("%5.2f%%: %s\n", predictions[index]*100, names[index]);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         top_predictions(net, top, indexes);
         printf("%s: Predicted in %f seconds.\n", input, sec(clock()-time));
         for(i = 0; i < top; ++i){
             int index = indexes[i];
             printf("%s: %f\n", names[index], predictions[index]);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         }
         if(r.data != im.data) free_image(r);
         free_image(im);
@@ -964,6 +1037,7 @@ void test_classifier(char *datacfg, char *cfgfile, char *weightfile, int target_
 }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void threat_classifier(char *datacfg, char *cfgfile, char *weightfile, int cam_index, const char *filename)
 {
@@ -1179,6 +1253,8 @@ void gun_classifier(char *datacfg, char *cfgfile, char *weightfile, int cam_inde
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void demo_classifier(char *datacfg, char *cfgfile, char *weightfile, int cam_index, const char *filename)
 {
 #ifdef OPENCV
@@ -1222,9 +1298,12 @@ void demo_classifier(char *datacfg, char *cfgfile, char *weightfile, int cam_ind
 
         float *predictions = network_predict(net, in_s.data);
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(net.hierarchy) hierarchy_predictions(predictions, net.outputs, net.hierarchy, 1, 1);
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         top_predictions(net, top, indexes);
 
         printf("\033[2J");
@@ -1245,11 +1324,16 @@ void demo_classifier(char *datacfg, char *cfgfile, char *weightfile, int cam_ind
         //timersub(&tval_after, &tval_before, &tval_result);
         //float curr = 1000000.f/((long int)tval_result.tv_usec);
 <<<<<<< HEAD
+<<<<<<< HEAD
         //fps = .9*fps + .1*curr;
 =======
 		//fps = .9*fps + .1*curr;
 		fps = 1.0;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+		//fps = .9*fps + .1*curr;
+		fps = 1.0;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     }
 #endif
 }
@@ -1263,6 +1347,7 @@ void run_classifier(int argc, char **argv)
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     char *gpu_list = find_char_arg(argc, argv, "-gpus", 0);
     int ngpus;
     int *gpus = read_intlist(gpu_list, &ngpus, gpu_index);
@@ -1273,6 +1358,9 @@ void run_classifier(int argc, char **argv)
 =======
     int cam_index = find_int_arg(argc, argv, "-c", 0);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    int cam_index = find_int_arg(argc, argv, "-c", 0);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int clear = find_arg(argc, argv, "-clear");
     char *data = argv[3];
     char *cfg = argv[4];
@@ -1280,6 +1368,7 @@ void run_classifier(int argc, char **argv)
     char *filename = (argc > 6) ? argv[6]: 0;
     char *layer_s = (argc > 7) ? argv[7]: 0;
     int layer = layer_s ? atoi(layer_s) : -1;
+<<<<<<< HEAD
 <<<<<<< HEAD
     if(0==strcmp(argv[2], "predict")) predict_classifier(data, cfg, weights, filename, top);
     else if(0==strcmp(argv[2], "try")) try_classifier(data, cfg, weights, filename, atoi(layer_s));
@@ -1294,6 +1383,8 @@ void run_classifier(int argc, char **argv)
     else if(0==strcmp(argv[2], "valid10")) validate_classifier_10(data, cfg, weights);
     else if(0==strcmp(argv[2], "validcrop")) validate_classifier_crop(data, cfg, weights);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     if(0==strcmp(argv[2], "predict")) predict_classifier(data, cfg, weights, filename);
     else if(0==strcmp(argv[2], "train")) train_classifier(data, cfg, weights, clear);
     else if(0==strcmp(argv[2], "demo")) demo_classifier(data, cfg, weights, cam_index, filename);
@@ -1303,7 +1394,10 @@ void run_classifier(int argc, char **argv)
     else if(0==strcmp(argv[2], "valid10")) validate_classifier_10(data, cfg, weights);
     else if(0==strcmp(argv[2], "validmulti")) validate_classifier_multi(data, cfg, weights);
     else if(0==strcmp(argv[2], "validsingle")) validate_classifier_single(data, cfg, weights);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     else if(0==strcmp(argv[2], "validfull")) validate_classifier_full(data, cfg, weights);
 }
 

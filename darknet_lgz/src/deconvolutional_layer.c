@@ -1,14 +1,18 @@
 #include "deconvolutional_layer.h"
 #include "convolutional_layer.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "batchnorm_layer.h"
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "utils.h"
 #include "im2col.h"
 #include "col2im.h"
 #include "blas.h"
 #include "gemm.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #include <stdio.h>
@@ -25,6 +29,8 @@ layer make_deconvolutional_layer(int batch, int h, int w, int c, int n, int size
     int i;
     layer l = {0};
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include <stdio.h>
 #include <time.h>
 
@@ -67,7 +73,10 @@ deconvolutional_layer make_deconvolutional_layer(int batch, int h, int w, int c,
 {
     int i;
     deconvolutional_layer l = {0};
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     l.type = DECONVOLUTIONAL;
 
     l.h = h;
@@ -78,6 +87,7 @@ deconvolutional_layer make_deconvolutional_layer(int batch, int h, int w, int c,
     l.stride = stride;
     l.size = size;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     l.nweights = c*n*size*size;
     l.nbiases = n;
@@ -97,6 +107,8 @@ deconvolutional_layer make_deconvolutional_layer(int batch, int h, int w, int c,
     l.out_h = (l.h - 1) * l.stride + l.size - 2*l.pad;
     l.out_w = (l.w - 1) * l.stride + l.size - 2*l.pad;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     l.filters = calloc(c*n*size*size, sizeof(float));
     l.filter_updates = calloc(c*n*size*size, sizeof(float));
 
@@ -112,11 +124,15 @@ deconvolutional_layer make_deconvolutional_layer(int batch, int h, int w, int c,
 
     l.out_h = out_h;
     l.out_w = out_w;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     l.out_c = n;
     l.outputs = l.out_w * l.out_h * l.out_c;
     l.inputs = l.w * l.h * l.c;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     l.output = calloc(l.batch*l.outputs, sizeof(float));
     l.delta  = calloc(l.batch*l.outputs, sizeof(float));
@@ -209,6 +225,8 @@ deconvolutional_layer make_deconvolutional_layer(int batch, int h, int w, int c,
 
     fprintf(stderr, "deconv%5d %2d x%2d /%2d  %4d x%4d x%4d   ->  %4d x%4d x%4d\n", n, size, size, stride, w, h, c, l.out_w, l.out_h, l.out_c);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     l.col_image = calloc(h*w*size*size*n, sizeof(float));
     l.output = calloc(l.batch*out_h * out_w * n, sizeof(float));
     l.delta  = calloc(l.batch*out_h * out_w * n, sizeof(float));
@@ -228,11 +246,15 @@ deconvolutional_layer make_deconvolutional_layer(int batch, int h, int w, int c,
     l.activation = activation;
 
     fprintf(stderr, "Deconvolutional Layer: %d x %d x %d image, %d filters -> %d x %d x %d image\n", h,w,c,n, out_h, out_w, n);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     return l;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void resize_deconvolutional_layer(layer *l, int h, int w)
 {
@@ -277,6 +299,8 @@ void forward_deconvolutional_layer(const layer l, network net)
 {
     int i;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void resize_deconvolutional_layer(deconvolutional_layer *l, int h, int w)
 {
     l->h = h;
@@ -307,7 +331,10 @@ void forward_deconvolutional_layer(const deconvolutional_layer l, network_state 
     int out_h = deconvolutional_out_height(l);
     int out_w = deconvolutional_out_width(l);
     int size = out_h*out_w;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     int m = l.size*l.size*l.n;
     int n = l.h*l.w;
@@ -316,6 +343,7 @@ void forward_deconvolutional_layer(const deconvolutional_layer l, network_state 
     fill_cpu(l.outputs*l.batch, 0, l.output, 1);
 
     for(i = 0; i < l.batch; ++i){
+<<<<<<< HEAD
 <<<<<<< HEAD
         float *a = l.weights;
         float *b = net.input + i*l.c*l.h*l.w;
@@ -347,6 +375,8 @@ void backward_deconvolutional_layer(layer l, network net)
 
     //if(net.delta) memset(net.delta, 0, l.batch*l.h*l.w*l.c*sizeof(float));
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         float *a = l.filters;
         float *b = state.input + i*l.c*l.h*l.w;
         float *c = l.col_image;
@@ -369,13 +399,17 @@ void backward_deconvolutional_layer(deconvolutional_layer l, network_state state
 
     gradient_array(l.output, size*l.n*l.batch, l.activation, l.delta);
     backward_bias(l.bias_updates, l.delta, l.batch, l.n, size);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     for(i = 0; i < l.batch; ++i){
         int m = l.c;
         int n = l.size*l.size*l.n;
         int k = l.h*l.w;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         float *a = net.input + i*m*k;
         float *b = net.workspace;
@@ -387,6 +421,8 @@ void backward_deconvolutional_layer(deconvolutional_layer l, network_state state
 
         if(net.delta){
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         float *a = state.input + i*m*n;
         float *b = l.col_image;
         float *c = l.filter_updates;
@@ -396,11 +432,15 @@ void backward_deconvolutional_layer(deconvolutional_layer l, network_state state
         gemm(0,1,m,n,k,alpha,a,k,b,k,1,c,n);
 
         if(state.delta){
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             int m = l.c;
             int n = l.h*l.w;
             int k = l.size*l.size*l.n;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
             float *a = l.weights;
             float *b = net.workspace;
@@ -408,16 +448,22 @@ void backward_deconvolutional_layer(deconvolutional_layer l, network_state state
 
             gemm_cpu(0,0,m,n,k,1,a,k,b,n,1,c,n);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             float *a = l.filters;
             float *b = l.col_image;
             float *c = state.delta + i*n*m;
 
             gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         }
     }
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void update_deconvolutional_layer(layer l, int batch, float learning_rate, float momentum, float decay)
 {
@@ -434,6 +480,8 @@ void update_deconvolutional_layer(layer l, int batch, float learning_rate, float
     axpy_cpu(size, learning_rate/batch, l.weight_updates, 1, l.weights, 1);
     scal_cpu(size, momentum, l.weight_updates, 1);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void update_deconvolutional_layer(deconvolutional_layer l, float learning_rate, float momentum, float decay)
 {
     int size = l.size*l.size*l.c*l.n;
@@ -443,7 +491,10 @@ void update_deconvolutional_layer(deconvolutional_layer l, float learning_rate, 
     axpy_cpu(size, -decay, l.filters, 1, l.filter_updates, 1);
     axpy_cpu(size, learning_rate, l.filter_updates, 1, l.filters, 1);
     scal_cpu(size, momentum, l.filter_updates, 1);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 

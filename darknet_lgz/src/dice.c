@@ -1,19 +1,29 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "darknet.h"
 =======
 #include "network.h"
 #include "utils.h"
 #include "parser.h"
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+#include "network.h"
+#include "utils.h"
+#include "parser.h"
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 char *dice_labels[] = {"face1","face2","face3","face4","face5","face6"};
 
 void train_dice(char *cfgfile, char *weightfile)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     data_seed = time(0);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    data_seed = time(0);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     srand(time(0));
     float avg_loss = -1;
     char *base = basecfg(cfgfile);
@@ -35,10 +45,14 @@ void train_dice(char *cfgfile, char *weightfile)
         ++i;
         time=clock();
 <<<<<<< HEAD
+<<<<<<< HEAD
         data train = load_data_old(paths, imgs, plist->size, labels, 6, net.w, net.h);
 =======
         data train = load_data(paths, imgs, plist->size, labels, 6, net.w, net.h);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        data train = load_data(paths, imgs, plist->size, labels, 6, net.w, net.h);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         printf("Loaded: %lf seconds\n", sec(clock()-time));
 
         time=clock();
@@ -72,10 +86,14 @@ void validate_dice(char *filename, char *weightfile)
     free_list(plist);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     data val = load_data_old(paths, m, 0, labels, 6, net.w, net.h);
 =======
     data val = load_data(paths, m, 0, labels, 6, net.w, net.h);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    data val = load_data(paths, m, 0, labels, 6, net.w, net.h);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     float *acc = network_accuracies(net, val, 2);
     printf("Validation Accuracy: %f, %d images\n", acc[0], m);
     free_data(val);

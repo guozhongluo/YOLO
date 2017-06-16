@@ -1,9 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "darknet.h"
 
 void train_cifar(char *cfgfile, char *weightfile)
 {
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "network.h"
 #include "utils.h"
 #include "parser.h"
@@ -17,7 +20,10 @@ void train_cifar(char *cfgfile, char *weightfile)
 void train_cifar(char *cfgfile, char *weightfile)
 {
     data_seed = time(0);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     srand(time(0));
     float avg_loss = -1;
     char *base = basecfg(cfgfile);
@@ -67,9 +73,13 @@ void train_cifar(char *cfgfile, char *weightfile)
 void train_cifar_distill(char *cfgfile, char *weightfile)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     data_seed = time(0);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    data_seed = time(0);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     srand(time(0));
     float avg_loss = -1;
     char *base = basecfg(cfgfile);
@@ -179,6 +189,7 @@ void test_cifar(char *filename, char *weightfile)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void extract_cifar()
 {
 char *labels[] = {"airplane","automobile","bird","cat","deer","dog","frog","horse","ship","truck"};
@@ -203,6 +214,8 @@ char *labels[] = {"airplane","automobile","bird","cat","deer","dog","frog","hors
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void test_cifar_csv(char *filename, char *weightfile)
 {
     network net = parse_network_cfg(filename);
@@ -281,9 +294,12 @@ void run_cifar(int argc, char **argv)
     char *weights = (argc > 4) ? argv[4] : 0;
     if(0==strcmp(argv[2], "train")) train_cifar(cfg, weights);
 <<<<<<< HEAD
+<<<<<<< HEAD
     else if(0==strcmp(argv[2], "extract")) extract_cifar();
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     else if(0==strcmp(argv[2], "distill")) train_cifar_distill(cfg, weights);
     else if(0==strcmp(argv[2], "test")) test_cifar(cfg, weights);
     else if(0==strcmp(argv[2], "multi")) test_cifar_multi(cfg, weights);

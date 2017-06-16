@@ -6,9 +6,12 @@
 #include "cuda.h"
 #include "utils.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
@@ -27,16 +30,20 @@ detection_layer make_detection_layer(int batch, int inputs, int n, int side, int
     l.rescore = rescore;
     l.side = side;
 <<<<<<< HEAD
+<<<<<<< HEAD
     l.w = side;
     l.h = side;
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     assert(side*side*((1 + l.coords)*l.n + l.classes) == inputs);
     l.cost = calloc(1, sizeof(float));
     l.outputs = l.inputs;
     l.truths = l.side*l.side*(1+l.coords+l.classes);
     l.output = calloc(batch*l.outputs, sizeof(float));
     l.delta = calloc(batch*l.outputs, sizeof(float));
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     l.forward = forward_detection_layer;
@@ -47,6 +54,9 @@ detection_layer make_detection_layer(int batch, int inputs, int n, int side, int
 =======
 #ifdef GPU
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+#ifdef GPU
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     l.output_gpu = cuda_make_array(l.output, batch*l.outputs);
     l.delta_gpu = cuda_make_array(l.delta, batch*l.outputs);
 #endif
@@ -58,6 +68,7 @@ detection_layer make_detection_layer(int batch, int inputs, int n, int side, int
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void forward_detection_layer(const detection_layer l, network net)
 {
     int locations = l.side*l.side;
@@ -65,12 +76,17 @@ void forward_detection_layer(const detection_layer l, network net)
     memcpy(l.output, net.input, l.outputs*l.batch*sizeof(float));
     //if(l.reorg) reorg(l.output, l.w*l.h, size*l.n, l.batch, 1);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void forward_detection_layer(const detection_layer l, network_state state)
 {
     int locations = l.side*l.side;
     int i,j;
     memcpy(l.output, state.input, l.outputs*l.batch*sizeof(float));
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int b;
     if (l.softmax){
         for(b = 0; b < l.batch; ++b){
@@ -78,19 +94,27 @@ void forward_detection_layer(const detection_layer l, network_state state)
             for (i = 0; i < locations; ++i) {
                 int offset = i*l.classes;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 softmax(l.output + index + offset, l.classes, 1, 1,
 =======
                 softmax_array(l.output + index + offset, l.classes, 1,
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+                softmax_array(l.output + index + offset, l.classes, 1,
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                         l.output + index + offset);
             }
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     if(net.train){
 =======
     if(state.train){
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    if(state.train){
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         float avg_iou = 0;
         float avg_cat = 0;
         float avg_allcat = 0;
@@ -105,10 +129,14 @@ void forward_detection_layer(const detection_layer l, network_state state)
             for (i = 0; i < locations; ++i) {
                 int truth_index = (b*locations + i)*(1+l.coords+l.classes);
 <<<<<<< HEAD
+<<<<<<< HEAD
                 int is_obj = net.truth[truth_index];
 =======
                 int is_obj = state.truth[truth_index];
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+                int is_obj = state.truth[truth_index];
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                 for (j = 0; j < l.n; ++j) {
                     int p_index = index + locations*l.classes + i*l.n + j;
                     l.delta[p_index] = l.noobject_scale*(0 - l.output[p_index]);
@@ -127,6 +155,7 @@ void forward_detection_layer(const detection_layer l, network_state state)
                 int class_index = index + i*l.classes;
                 for(j = 0; j < l.classes; ++j) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                     l.delta[class_index+j] = l.class_scale * (net.truth[truth_index+1+j] - l.output[class_index+j]);
                     *(l.cost) += l.class_scale * pow(net.truth[truth_index+1+j] - l.output[class_index+j], 2);
                     if(net.truth[truth_index + 1 + j]) avg_cat += l.output[class_index+j];
@@ -135,6 +164,8 @@ void forward_detection_layer(const detection_layer l, network_state state)
 
                 box truth = float_to_box(net.truth + truth_index + 1 + l.classes, 1);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                     l.delta[class_index+j] = l.class_scale * (state.truth[truth_index+1+j] - l.output[class_index+j]);
                     *(l.cost) += l.class_scale * pow(state.truth[truth_index+1+j] - l.output[class_index+j], 2);
                     if(state.truth[truth_index + 1 + j]) avg_cat += l.output[class_index+j];
@@ -142,17 +173,24 @@ void forward_detection_layer(const detection_layer l, network_state state)
                 }
 
                 box truth = float_to_box(state.truth + truth_index + 1 + l.classes);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                 truth.x /= l.side;
                 truth.y /= l.side;
 
                 for(j = 0; j < l.n; ++j){
                     int box_index = index + locations*(l.classes + l.n) + (i*l.n + j) * l.coords;
 <<<<<<< HEAD
+<<<<<<< HEAD
                     box out = float_to_box(l.output + box_index, 1);
 =======
                     box out = float_to_box(l.output + box_index);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+                    box out = float_to_box(l.output + box_index);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                     out.x /= l.side;
                     out.y /= l.side;
 
@@ -185,10 +223,14 @@ void forward_detection_layer(const detection_layer l, network_state state)
                     }
                 }
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if(l.random && *(net.seen) < 64000){
 =======
                 if(l.random && *(state.net.seen) < 64000){
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+                if(l.random && *(state.net.seen) < 64000){
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                     best_index = rand()%l.n;
                 }
 
@@ -196,10 +238,14 @@ void forward_detection_layer(const detection_layer l, network_state state)
                 int tbox_index = truth_index + 1 + l.classes;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 box out = float_to_box(l.output + box_index, 1);
 =======
                 box out = float_to_box(l.output + box_index);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+                box out = float_to_box(l.output + box_index);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                 out.x /= l.side;
                 out.y /= l.side;
                 if (l.sqrt) {
@@ -220,6 +266,7 @@ void forward_detection_layer(const detection_layer l, network_state state)
                 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 l.delta[box_index+0] = l.coord_scale*(net.truth[tbox_index + 0] - l.output[box_index + 0]);
                 l.delta[box_index+1] = l.coord_scale*(net.truth[tbox_index + 1] - l.output[box_index + 1]);
                 l.delta[box_index+2] = l.coord_scale*(net.truth[tbox_index + 2] - l.output[box_index + 2]);
@@ -228,6 +275,8 @@ void forward_detection_layer(const detection_layer l, network_state state)
                     l.delta[box_index+2] = l.coord_scale*(sqrt(net.truth[tbox_index + 2]) - l.output[box_index + 2]);
                     l.delta[box_index+3] = l.coord_scale*(sqrt(net.truth[tbox_index + 3]) - l.output[box_index + 3]);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                 l.delta[box_index+0] = l.coord_scale*(state.truth[tbox_index + 0] - l.output[box_index + 0]);
                 l.delta[box_index+1] = l.coord_scale*(state.truth[tbox_index + 1] - l.output[box_index + 1]);
                 l.delta[box_index+2] = l.coord_scale*(state.truth[tbox_index + 2] - l.output[box_index + 2]);
@@ -235,7 +284,10 @@ void forward_detection_layer(const detection_layer l, network_state state)
                 if(l.sqrt){
                     l.delta[box_index+2] = l.coord_scale*(sqrt(state.truth[tbox_index + 2]) - l.output[box_index + 2]);
                     l.delta[box_index+3] = l.coord_scale*(sqrt(state.truth[tbox_index + 3]) - l.output[box_index + 3]);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                 }
 
                 *(l.cost) += pow(1-iou, 2);
@@ -276,6 +328,7 @@ void forward_detection_layer(const detection_layer l, network_state state)
 
         printf("Detection Avg IOU: %f, Pos Cat: %f, All Cat: %f, Pos Obj: %f, Any Obj: %f, count: %d\n", avg_iou/count, avg_cat/count, avg_allcat/(count*l.classes), avg_obj/count, avg_anyobj/(l.batch*locations*l.n), count);
 <<<<<<< HEAD
+<<<<<<< HEAD
         //if(l.reorg) reorg(l.delta, l.w*l.h, size*l.n, l.batch, 0);
     }
 }
@@ -313,17 +366,23 @@ void get_detection_boxes(layer l, int w, int h, float thresh, float **probs, box
         }
     }
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     }
 }
 
 void backward_detection_layer(const detection_layer l, network_state state)
 {
     axpy_cpu(l.batch*l.inputs, 1, l.delta, 1, state.delta, 1);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 #ifdef GPU
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void forward_detection_layer_gpu(const detection_layer l, network net)
 {
@@ -345,6 +404,8 @@ void backward_detection_layer_gpu(detection_layer l, network net)
     axpy_ongpu(l.batch*l.inputs, 1, l.delta_gpu, 1, net.delta_gpu, 1);
     //copy_ongpu(l.batch*l.inputs, l.delta_gpu, 1, net.delta_gpu, 1);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void forward_detection_layer_gpu(const detection_layer l, network_state state)
 {
     if(!state.train){
@@ -375,7 +436,10 @@ void backward_detection_layer_gpu(detection_layer l, network_state state)
 {
     axpy_ongpu(l.batch*l.inputs, 1, l.delta_gpu, 1, state.delta, 1);
     //copy_ongpu(l.batch*l.inputs, l.delta_gpu, 1, state.delta, 1);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 #endif
 

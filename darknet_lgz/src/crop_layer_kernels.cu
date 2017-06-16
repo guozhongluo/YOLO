@@ -181,10 +181,14 @@ __global__ void forward_crop_layer_kernel(float *input, float *rand, int size, i
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern "C" void forward_crop_layer_gpu(crop_layer layer, network net)
 =======
 extern "C" void forward_crop_layer_gpu(crop_layer layer, network_state state)
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+extern "C" void forward_crop_layer_gpu(crop_layer layer, network_state state)
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
     cuda_random(layer.rand_gpu, layer.batch*8);
 
@@ -200,19 +204,27 @@ extern "C" void forward_crop_layer_gpu(crop_layer layer, network_state state)
     int size = layer.batch * layer.w * layer.h;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     levels_image_kernel<<<cuda_gridsize(size), BLOCK>>>(net.input_gpu, layer.rand_gpu, layer.batch, layer.w, layer.h, net.train, layer.saturation, layer.exposure, translate, scale, layer.shift);
 =======
     levels_image_kernel<<<cuda_gridsize(size), BLOCK>>>(state.input, layer.rand_gpu, layer.batch, layer.w, layer.h, state.train, layer.saturation, layer.exposure, translate, scale, layer.shift);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    levels_image_kernel<<<cuda_gridsize(size), BLOCK>>>(state.input, layer.rand_gpu, layer.batch, layer.w, layer.h, state.train, layer.saturation, layer.exposure, translate, scale, layer.shift);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     check_error(cudaPeekAtLastError());
 
     size = layer.batch*layer.c*layer.out_w*layer.out_h;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     forward_crop_layer_kernel<<<cuda_gridsize(size), BLOCK>>>(net.input_gpu, layer.rand_gpu, size, layer.c, layer.h, layer.w, layer.out_h, layer.out_w, net.train, layer.flip, radians, layer.output_gpu);
 =======
     forward_crop_layer_kernel<<<cuda_gridsize(size), BLOCK>>>(state.input, layer.rand_gpu, size, layer.c, layer.h, layer.w, layer.out_h, layer.out_w, state.train, layer.flip, radians, layer.output_gpu);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    forward_crop_layer_kernel<<<cuda_gridsize(size), BLOCK>>>(state.input, layer.rand_gpu, size, layer.c, layer.h, layer.w, layer.out_h, layer.out_w, state.train, layer.flip, radians, layer.output_gpu);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     check_error(cudaPeekAtLastError());
 
 /*

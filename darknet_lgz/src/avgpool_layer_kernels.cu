@@ -44,6 +44,7 @@ __global__ void backward_avgpool_layer_kernel(int n, int w, int h, int c, float 
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern "C" void forward_avgpool_layer_gpu(avgpool_layer layer, network net)
 {
     size_t n = layer.c*layer.batch;
@@ -58,6 +59,8 @@ extern "C" void backward_avgpool_layer_gpu(avgpool_layer layer, network net)
 
     backward_avgpool_layer_kernel<<<cuda_gridsize(n), BLOCK>>>(n, layer.w, layer.h, layer.c, net.delta_gpu, layer.delta_gpu);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 extern "C" void forward_avgpool_layer_gpu(avgpool_layer layer, network_state state)
 {
     size_t n = layer.c*layer.batch;
@@ -71,7 +74,10 @@ extern "C" void backward_avgpool_layer_gpu(avgpool_layer layer, network_state st
     size_t n = layer.c*layer.batch;
 
     backward_avgpool_layer_kernel<<<cuda_gridsize(n), BLOCK>>>(n, layer.w, layer.h, layer.c, state.delta, layer.delta_gpu);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     check_error(cudaPeekAtLastError());
 }
 

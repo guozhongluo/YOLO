@@ -13,10 +13,15 @@ int read_option(char *s, list *options);
 void option_insert(list *l, char *key, char *val);
 char *option_find(list *l, char *key);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 char *option_find_str(list *l, char *key, char *def);
 int option_find_int(list *l, char *key, int def);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+char *option_find_str(list *l, char *key, char *def);
+int option_find_int(list *l, char *key, int def);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 int option_find_int_quiet(list *l, char *key, int def);
 float option_find_float(list *l, char *key, float def);
 float option_find_float_quiet(list *l, char *key, float def);

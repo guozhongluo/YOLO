@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 box float_to_box(float *f, int stride)
 {
     box b;
@@ -12,6 +13,8 @@ box float_to_box(float *f, int stride)
     b.w = f[2*stride];
     b.h = f[3*stride];
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 box float_to_box(float *f)
 {
     box b;
@@ -19,7 +22,10 @@ box float_to_box(float *f)
     b.y = f[1];
     b.w = f[2];
     b.h = f[3];
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     return b;
 }
 
@@ -257,6 +263,7 @@ int nms_comparator(const void *pa, const void *pb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void do_nms_obj(box *boxes, float **probs, int total, int classes, float thresh)
 {
     int i, j, k;
@@ -287,6 +294,8 @@ void do_nms_obj(box *boxes, float **probs, int total, int classes, float thresh)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void do_nms_sort(box *boxes, float **probs, int total, int classes, float thresh)
 {
     int i, j, k;

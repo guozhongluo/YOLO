@@ -9,10 +9,14 @@
 void train_imagenet(char *cfgfile, char *weightfile)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     //data_seed = time(0);
 =======
     data_seed = time(0);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    data_seed = time(0);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     srand(time(0));
     float avg_loss = -1;
     char *base = basecfg(cfgfile);

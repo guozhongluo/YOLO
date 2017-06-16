@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "darknet.h"
 
 #include <unistd.h>
@@ -7,6 +8,8 @@ int inverted = 1;
 int noi = 1;
 static const int nind = 2;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include "network.h"
 #include "utils.h"
 #include "parser.h"
@@ -21,7 +24,10 @@ int inverted = 1;
 int noi = 1;
 //static const int nind = 5;
 #define  nind 5
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 typedef struct {
     char **data;
@@ -100,6 +106,7 @@ void board_to_string(char *s, float *board)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 data random_go_moves(moves m, int n)
 {
     data d = {0};
@@ -125,6 +132,8 @@ data random_go_moves(moves m, int n)
         image in = float_to_image(19, 19, 1, board);
         image out = float_to_image(19, 19, 1, label);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void random_go_moves(moves m, float *boards, float *labels, int n)
 {
     int i;
@@ -141,7 +150,10 @@ void random_go_moves(moves m, float *boards, float *labels, int n)
         int rotate = rand()%4;
         image in = float_to_image(19, 19, 1, boards+i*19*19);
         image out = float_to_image(19, 19, 1, labels+i*19*19);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         if(flip){
             flip_image(in);
             flip_image(out);
@@ -149,6 +161,7 @@ void random_go_moves(moves m, float *boards, float *labels, int n)
         rotate_image_cw(in, rotate);
         rotate_image_cw(out, rotate);
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
     return d;
 }
@@ -175,6 +188,8 @@ void train_go(char *cfgfile, char *weightfile, char *filename, int *gpus, int ng
     }
     network net = nets[0];
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 
@@ -189,12 +204,16 @@ void train_go(char *cfgfile, char *weightfile)
     if(weightfile){
         load_weights(&net, weightfile);
     }
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     printf("Learning Rate: %g, Momentum: %g, Decay: %g\n", net.learning_rate, net.momentum, net.decay);
 
     char *backup_directory = "/home/pjreddie/backup/";
 
     char buff[256];
+<<<<<<< HEAD
 <<<<<<< HEAD
     moves m = load_go_moves(filename);
     //moves m = load_go_moves("games.txt");
@@ -202,17 +221,23 @@ void train_go(char *cfgfile, char *weightfile)
     int N = m.n;
     printf("Moves: %d\n", N);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     float *board = calloc(19*19*net.batch, sizeof(float));
     float *move = calloc(19*19*net.batch, sizeof(float));
     moves m = load_go_moves("/home/pjreddie/go.train");
     //moves m = load_go_moves("games.txt");
 
     int N = m.n;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int epoch = (*net.seen)/N;
     while(get_current_batch(net) < net.max_batches || net.max_batches == 0){
         clock_t time=clock();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         data train = random_go_moves(m, net.batch*net.subdivisions*ngpus);
         printf("Loaded: %lf seconds\n", sec(clock()-time));
@@ -234,6 +259,10 @@ void train_go(char *cfgfile, char *weightfile)
         random_go_moves(m, board, move, net.batch);
         float loss = train_network_datum(net, board, move) / net.batch;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        random_go_moves(m, board, move, net.batch);
+        float loss = train_network_datum(net, board, move) / net.batch;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         if(avg_loss == -1) avg_loss = loss;
         avg_loss = avg_loss*.95 + loss*.05;
         printf("%d, %.3f: %f, %f avg, %f rate, %lf seconds, %d images\n", get_current_batch(net), (float)(*net.seen)/N, loss, avg_loss, get_current_rate(net), sec(clock()-time), *net.seen);
@@ -245,10 +274,14 @@ void train_go(char *cfgfile, char *weightfile)
 
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(get_current_batch(net)%1000 == 0){
 =======
         if(get_current_batch(net)%100 == 0){
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        if(get_current_batch(net)%100 == 0){
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             char buff[256];
             sprintf(buff, "%s/%s.backup",backup_directory,base);
             save_weights(net, buff);
@@ -302,17 +335,23 @@ int *calculate_liberties(float *board)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void print_board(FILE *stream, float *board, int swap, int *indexes)
 {
     int i,j,n;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void print_board(float *board, int swap, int *indexes)
 {
     //FILE *stream = stdout;
     FILE *stream = stderr;
     int i,j,n;
     fprintf(stream, "\n\n");
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     fprintf(stream, "   ");
     for(i = 0; i < 19; ++i){
         fprintf(stream, "%c ", 'A' + i + 1*(i > 7 && noi));
@@ -329,6 +368,7 @@ void print_board(float *board, int swap, int *indexes)
                         found = 1;
                         /*
 <<<<<<< HEAD
+<<<<<<< HEAD
                            if(n == 0) fprintf(stream, "\uff11");
                            else if(n == 1) fprintf(stream, "\uff12");
                            else if(n == 2) fprintf(stream, "\uff13");
@@ -336,13 +376,18 @@ void print_board(float *board, int swap, int *indexes)
                            else if(n == 4) fprintf(stream, "\uff15");
                          */
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                         if(n == 0) fprintf(stream, "\uff11");
                         else if(n == 1) fprintf(stream, "\uff12");
                         else if(n == 2) fprintf(stream, "\uff13");
                         else if(n == 3) fprintf(stream, "\uff14");
                         else if(n == 4) fprintf(stream, "\uff15");
                         */
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
                         if(n == 0) fprintf(stream, " 1");
                         else if(n == 1) fprintf(stream, " 2");
                         else if(n == 2) fprintf(stream, " 3");
@@ -374,10 +419,14 @@ void predict_move(network net, float *board, float *move, int multi)
 {
     float *output = network_predict(net, board);
 <<<<<<< HEAD
+<<<<<<< HEAD
     copy_cpu(19*19+1, output, 1, move, 1);
 =======
     copy_cpu(19*19, output, 1, move, 1);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    copy_cpu(19*19, output, 1, move, 1);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int i;
     if(multi){
         image bim = float_to_image(19, 19, 1, board);
@@ -392,19 +441,27 @@ void predict_move(network net, float *board, float *move, int multi)
             rotate_image_cw(oim, -i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             axpy_cpu(19*19+1, 1, output, 1, move, 1);
 =======
             axpy_cpu(19*19, 1, output, 1, move, 1);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+            axpy_cpu(19*19, 1, output, 1, move, 1);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
             if(i >= 4) flip_image(bim);
             rotate_image_cw(bim, -i);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         scal_cpu(19*19+1, 1./8., move, 1);
 =======
         scal_cpu(19*19, 1./8., move, 1);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        scal_cpu(19*19, 1./8., move, 1);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     }
     for(i = 0; i < 19*19; ++i){
         if(board[i]) move[i] = 0;
@@ -475,6 +532,7 @@ int generate_move(network net, int player, float *board, int multi, float thresh
 {
     int i, j;
 <<<<<<< HEAD
+<<<<<<< HEAD
     int empty = 1;
     for(i = 0; i < 19*19; ++i){
         if (board[i]) {
@@ -493,21 +551,31 @@ int generate_move(network net, int player, float *board, int multi, float thresh
 
     float move[361];
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    for(i = 0; i < net.n; ++i) net.layers[i].temperature = temp;
+
+    float move[361];
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     if (player < 0) flip_board(board);
     predict_move(net, board, move, multi);
     if (player < 0) flip_board(board);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
     
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     for(i = 0; i < 19; ++i){
         for(j = 0; j < 19; ++j){
             if (!legal_go(board, ko, player, i, j)) move[i*19 + j] = 0;
         }
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     int indexes[2];
     top_k(move, 19*19+1, nind, indexes);
@@ -530,6 +598,8 @@ int generate_move(network net, int player, float *board, int multi, float thresh
         }
         print_board(stderr, board, player, indexes);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int indexes[nind];
     top_k(move, 19*19, nind, indexes);
     if(thresh > move[indexes[0]]) thresh = move[indexes[nind-1]];
@@ -552,11 +622,15 @@ int generate_move(network net, int player, float *board, int multi, float thresh
             if (!move[indexes[i]]) indexes[i] = -1;
         }
         print_board(board, player, indexes);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         for(i = 0; i < nind; ++i){
             fprintf(stderr, "%d: %f\n", i+1, move[indexes[i]]);
         }
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
     if (row == 19) return -1;
 
@@ -574,6 +648,8 @@ int generate_move(network net, int player, float *board, int multi, float thresh
 void valid_go(char *cfgfile, char *weightfile, int multi, char *filename)
 {
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     if(suicide_go(board, player, row, col)){
         return -1; 
@@ -585,7 +661,10 @@ void valid_go(char *cfgfile, char *weightfile, int multi, char *filename)
 void valid_go(char *cfgfile, char *weightfile, int multi)
 {
     data_seed = time(0);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     srand(time(0));
     char *base = basecfg(cfgfile);
     printf("%s\n", base);
@@ -598,6 +677,7 @@ void valid_go(char *cfgfile, char *weightfile, int multi)
 
     float *board = calloc(19*19, sizeof(float));
 <<<<<<< HEAD
+<<<<<<< HEAD
     float *move = calloc(19*19+1, sizeof(float));
    // moves m = load_go_moves("/home/pjreddie/backup/go.test");
     moves m = load_go_moves(filename);
@@ -605,6 +685,10 @@ void valid_go(char *cfgfile, char *weightfile, int multi)
     float *move = calloc(19*19, sizeof(float));
     moves m = load_go_moves("/home/pjreddie/backup/go.test");
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    float *move = calloc(19*19, sizeof(float));
+    moves m = load_go_moves("/home/pjreddie/backup/go.test");
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     int N = m.n;
     int i;
@@ -622,6 +706,7 @@ void valid_go(char *cfgfile, char *weightfile, int multi)
     }
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int print_game(float *board, FILE *fp)
 {
@@ -832,6 +917,8 @@ void engine_go(char *filename, char *weightfile, int multi)
         fflush(stderr);
     }
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void engine_go(char *filename, char *weightfile, int multi)
 {
 //     network net = parse_network_cfg(filename);
@@ -999,7 +1086,10 @@ void engine_go(char *filename, char *weightfile, int multi)
 //         fflush(stdout);
 //         fflush(stderr);
 //     }
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 void test_go(char *cfg, char *weights, int multi)
@@ -1012,6 +1102,7 @@ void test_go(char *cfg, char *weights, int multi)
     set_batch_network(&net, 1);
     float *board = calloc(19*19, sizeof(float));
 <<<<<<< HEAD
+<<<<<<< HEAD
     float *move = calloc(19*19+1, sizeof(float));
     int color = 1;
     while(1){
@@ -1023,6 +1114,8 @@ void test_go(char *cfg, char *weights, int multi)
         top_k(move, 19*19+1, nind, indexes);
         print_board(stderr, board, color, indexes);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     float *move = calloc(19*19, sizeof(float));
     int color = 1;
     while(1){
@@ -1056,11 +1149,15 @@ void test_go(char *cfg, char *weights, int multi)
         int row, col;
         top_k(move, 19*19, nind, indexes);
         print_board(board, color, indexes);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         for(i = 0; i < nind; ++i){
             int index = indexes[i];
             row = index / 19;
             col = index % 19;
+<<<<<<< HEAD
 <<<<<<< HEAD
             if(row == 19){
                 printf("%d: Pass, %.2f%%\n", i+1, move[index]*100);
@@ -1070,6 +1167,9 @@ void test_go(char *cfg, char *weights, int multi)
 =======
             printf("%d: %c %d, %.2f%%\n", i+1, col + 'A' + 1*(col > 7 && noi), (inverted)?19 - row : row+1, move[index]*100);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+            printf("%d: %c %d, %.2f%%\n", i+1, col + 'A' + 1*(col > 7 && noi), (inverted)?19 - row : row+1, move[index]*100);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         }
         //if(color == 1) printf("\u25EF Enter move: ");
         //else printf("\u25C9 Enter move: ");
@@ -1088,12 +1188,16 @@ void test_go(char *cfg, char *weights, int multi)
                 row = index / 19;
                 col = index % 19;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if(row < 19){
                     move_go(board, 1, row, col);
                 }
 =======
                 board[row*19 + col] = 1;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+                board[row*19 + col] = 1;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             }
         } else if (cnum){
             if (c <= 'T' && c >= 'A'){
@@ -1102,10 +1206,14 @@ void test_go(char *cfg, char *weights, int multi)
                 col = c - 'A';
                 if (col > 7 && noi) col -= 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if (num == 2) move_go(board, 1, row, col);
 =======
                 if (num == 2) board[row*19 + col] = 1;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+                if (num == 2) board[row*19 + col] = 1;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             } else if (c == 'p') {
                 // Pass
             } else if(c=='b' || c == 'w'){
@@ -1133,6 +1241,7 @@ void test_go(char *cfg, char *weights, int multi)
 float score_game(float *board)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     int i;
     FILE *f = fopen("game.txt", "w");
     int count = print_game(board, f);
@@ -1156,6 +1265,8 @@ float score_game(float *board)
     pclose(p);
     return score;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 //     FILE *f = fopen("game.txt", "w");
 //     int i, j;
 //     int count = 3;
@@ -1190,7 +1301,10 @@ float score_game(float *board)
 //     return score;
 
 	return 0;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 void self_go(char *filename, char *weightfile, char *f2, char *w2, int multi)
@@ -1209,10 +1323,14 @@ void self_go(char *filename, char *weightfile, char *f2, char *w2, int multi)
     }
     srand(time(0));
 <<<<<<< HEAD
+<<<<<<< HEAD
     char boards[600][93];
 =======
     char boards[300][93];
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    char boards[300][93];
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int count = 0;
     set_batch_network(&net, 1);
     set_batch_network(&net2, 1);
@@ -1226,6 +1344,7 @@ void self_go(char *filename, char *weightfile, char *f2, char *w2, int multi)
     int total = 0;
     while(1){
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (done){
             float score = score_game(board);
 =======
@@ -1233,16 +1352,24 @@ void self_go(char *filename, char *weightfile, char *f2, char *w2, int multi)
             float score = score_game(board);
             int i = (score > 0)? 0 : 1;
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+        if (done || count >= 300){
+            float score = score_game(board);
+            int i = (score > 0)? 0 : 1;
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             if((score > 0) == (total%2==0)) ++p1;
             else ++p2;
             ++total;
             fprintf(stderr, "Total: %d, Player 1: %f, Player 2: %f\n", total, (float)p1/total, (float)p2/total);
+<<<<<<< HEAD
 <<<<<<< HEAD
             sleep(1);
             /*
             int i = (score > 0)? 0 : 1;
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             int j;
             for(; i < count; i += 2){
                 for(j = 0; j < 93; ++j){
@@ -1251,9 +1378,12 @@ void self_go(char *filename, char *weightfile, char *f2, char *w2, int multi)
                 printf("\n");
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
             */
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             memset(board, 0, 19*19*sizeof(float));
             player = 1;
             done = 0;
@@ -1262,16 +1392,22 @@ void self_go(char *filename, char *weightfile, char *f2, char *w2, int multi)
             fflush(stderr);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         print_board(stderr, board, 1, 0);
         //sleep(1);
         network use = ((total%2==0) == (player==1)) ? net : net2;
         int index = generate_move(use, player, board, multi, .4, 1, two, 0);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         //print_board(board, 1, 0);
         //sleep(1);
         network use = ((total%2==0) == (player==1)) ? net : net2;
         int index = generate_move(use, player, board, multi, .1, .7, two, 0);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         if(index < 0){
             done = 1;
             continue;
@@ -1306,6 +1442,7 @@ void run_go(int argc, char **argv)
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     char *gpu_list = find_char_arg(argc, argv, "-gpus", 0);
     int *gpus = 0;
     int gpu = 0;
@@ -1332,11 +1469,14 @@ void run_go(int argc, char **argv)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     char *cfg = argv[3];
     char *weights = (argc > 4) ? argv[4] : 0;
     char *c2 = (argc > 5) ? argv[5] : 0;
     char *w2 = (argc > 6) ? argv[6] : 0;
     int multi = find_arg(argc, argv, "-multi");
+<<<<<<< HEAD
 <<<<<<< HEAD
     if(0==strcmp(argv[2], "train")) train_go(cfg, weights, c2, gpus, ngpus, clear);
     else if(0==strcmp(argv[2], "valid")) valid_go(cfg, weights, multi, c2);
@@ -1344,6 +1484,10 @@ void run_go(int argc, char **argv)
     if(0==strcmp(argv[2], "train")) train_go(cfg, weights);
     else if(0==strcmp(argv[2], "valid")) valid_go(cfg, weights, multi);
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    if(0==strcmp(argv[2], "train")) train_go(cfg, weights);
+    else if(0==strcmp(argv[2], "valid")) valid_go(cfg, weights, multi);
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     else if(0==strcmp(argv[2], "self")) self_go(cfg, weights, c2, w2, multi);
     else if(0==strcmp(argv[2], "test")) test_go(cfg, weights, multi);
     else if(0==strcmp(argv[2], "engine")) engine_go(cfg, weights, multi);

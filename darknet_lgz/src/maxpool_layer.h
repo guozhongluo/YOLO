@@ -10,6 +10,7 @@ typedef layer maxpool_layer;
 
 image get_maxpool_image(maxpool_layer l);
 <<<<<<< HEAD
+<<<<<<< HEAD
 maxpool_layer make_maxpool_layer(int batch, int h, int w, int c, int size, int stride, int padding);
 void resize_maxpool_layer(maxpool_layer *l, int w, int h);
 void forward_maxpool_layer(const maxpool_layer l, network net);
@@ -19,6 +20,8 @@ void backward_maxpool_layer(const maxpool_layer l, network net);
 void forward_maxpool_layer_gpu(maxpool_layer l, network net);
 void backward_maxpool_layer_gpu(maxpool_layer l, network net);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 maxpool_layer make_maxpool_layer(int batch, int h, int w, int c, int size, int stride);
 void resize_maxpool_layer(maxpool_layer *l, int w, int h);
 void forward_maxpool_layer(const maxpool_layer l, network_state state);
@@ -27,7 +30,10 @@ void backward_maxpool_layer(const maxpool_layer l, network_state state);
 #ifdef GPU
 void forward_maxpool_layer_gpu(maxpool_layer l, network_state state);
 void backward_maxpool_layer_gpu(maxpool_layer l, network_state state);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #endif
 
 #endif

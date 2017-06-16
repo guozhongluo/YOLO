@@ -4,6 +4,7 @@
 #include <math.h>
 #include <assert.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <unistd.h>
 #include <float.h>
 #include <limits.h>
@@ -80,12 +81,17 @@ void shuffle(void *arr, size_t n, size_t size)
     }
 }
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include <float.h>
 #include <limits.h>
 
 #include "utils.h"
 #include "unistd.h"
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
 void del_arg(int argc, char **argv, int index)
 {
@@ -191,6 +197,7 @@ void pm(int M, int N, float *A)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void find_replace(char *str, char *orig, char *rep, char *output)
 {
     char buffer[4096] = {0};
@@ -206,6 +213,8 @@ void find_replace(char *str, char *orig, char *rep, char *output)
 
     sprintf(output, "%s%s%s", buffer, rep, p+strlen(orig));
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 char *find_replace(char *str, char *orig, char *rep)
 {
     static char buffer[4096];
@@ -223,7 +232,10 @@ char *find_replace(char *str, char *orig, char *rep)
     sprintf(buffer, "%s", buffer3);
 
     return buffer;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 float sec(clock_t clocks)
@@ -487,6 +499,7 @@ void mean_arrays(float **a, int n, int els, float *avg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void print_statistics(float *a, int n)
 {
     float m = mean_array(a, n);
@@ -496,6 +509,8 @@ void print_statistics(float *a, int n)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 float variance_array(float *a, int n)
 {
     int i;
@@ -604,6 +619,7 @@ int max_index(float *a, int n)
 int rand_int(int min, int max)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (max < min){
         int s = min;
         min = max;
@@ -611,15 +627,21 @@ int rand_int(int min, int max)
     }
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     int r = (rand()%(max - min + 1)) + min;
     return r;
 }
 
 // From http://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 #define TWO_PI 6.2831853071795864769252866
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+#define TWO_PI 6.2831853071795864769252866
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 float rand_normal()
 {
     static int haveSpare = 0;
@@ -656,6 +678,7 @@ size_t rand_size_t()
 {
     return  ((size_t)(rand()&0xff) << 56) | 
 <<<<<<< HEAD
+<<<<<<< HEAD
         ((size_t)(rand()&0xff) << 48) |
         ((size_t)(rand()&0xff) << 40) |
         ((size_t)(rand()&0xff) << 32) |
@@ -664,6 +687,8 @@ size_t rand_size_t()
         ((size_t)(rand()&0xff) << 8) |
         ((size_t)(rand()&0xff) << 0);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
             ((size_t)(rand()&0xff) << 48) |
             ((size_t)(rand()&0xff) << 40) |
             ((size_t)(rand()&0xff) << 32) |
@@ -671,11 +696,15 @@ size_t rand_size_t()
             ((size_t)(rand()&0xff) << 16) |
             ((size_t)(rand()&0xff) << 8) |
             ((size_t)(rand()&0xff) << 0);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 }
 
 float rand_uniform(float min, float max)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     if(max < min){
         float swap = min;
@@ -697,6 +726,11 @@ float rand_scale(float s)
 }
 
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    return ((float)rand()/RAND_MAX * (max - min)) + min;
+}
+
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 float **one_hot_encode(float *a, int n, int k)
 {
     int i;

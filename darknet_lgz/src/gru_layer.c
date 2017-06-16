@@ -37,6 +37,7 @@ layer make_gru_layer(int batch, int inputs, int outputs, int steps, int batch_no
     l.inputs = inputs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     l.uz = malloc(sizeof(layer));
     fprintf(stderr, "\t\t");
     *(l.uz) = make_connected_layer(batch*steps, inputs, outputs, LINEAR, batch_normalize);
@@ -69,6 +70,8 @@ layer make_gru_layer(int batch, int inputs, int outputs, int steps, int batch_no
     *(l.wh) = make_connected_layer(batch*steps, outputs, outputs, LINEAR, batch_normalize);
     l.wh->batch = batch;
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     l.input_z_layer = malloc(sizeof(layer));
     fprintf(stderr, "\t\t");
     *(l.input_z_layer) = make_connected_layer(batch*steps, inputs, outputs, LINEAR, batch_normalize);
@@ -102,7 +105,10 @@ layer make_gru_layer(int batch, int inputs, int outputs, int steps, int batch_no
     fprintf(stderr, "\t\t");
     *(l.state_h_layer) = make_connected_layer(batch*steps, outputs, outputs, LINEAR, batch_normalize);
     l.state_h_layer->batch = batch;
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
     l.batch_normalize = batch_normalize;
 
@@ -119,6 +125,7 @@ layer make_gru_layer(int batch, int inputs, int outputs, int steps, int batch_no
     l.z_cpu = calloc(outputs*batch, sizeof(float));
     l.h_cpu = calloc(outputs*batch, sizeof(float));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     l.forward = forward_gru_layer;
     l.backward = backward_gru_layer;
@@ -148,6 +155,8 @@ layer make_gru_layer(int batch, int inputs, int outputs, int steps, int batch_no
     cudnnSetTensor4dDescriptor(l.wr->dstTensorDesc, CUDNN_TENSOR_NCHW, CUDNN_DATA_FLOAT, batch, l.wr->out_c, l.wr->out_h, l.wr->out_w); 
 #endif
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #ifdef GPU
     l.forgot_state_gpu = cuda_make_array(l.output, batch*outputs);
     l.forgot_delta_gpu = cuda_make_array(l.output, batch*outputs);
@@ -158,7 +167,10 @@ layer make_gru_layer(int batch, int inputs, int outputs, int steps, int batch_no
     l.r_gpu = cuda_make_array(l.output_gpu, batch*outputs);
     l.z_gpu = cuda_make_array(l.output_gpu, batch*outputs);
     l.h_gpu = cuda_make_array(l.output_gpu, batch*outputs);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #endif
 
     return l;
@@ -171,6 +183,7 @@ void update_gru_layer(layer l, int batch, float learning_rate, float momentum, f
     update_connected_layer(*(l.output_layer), batch, learning_rate, momentum, decay);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void forward_gru_layer(layer l, network net)
 {
@@ -194,6 +207,8 @@ void forward_gru_layer(layer l, network net)
     fill_cpu(l.outputs * l.batch * l.steps, 0, wh.delta, 1);
     if(net.train) {
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void forward_gru_layer(layer l, network_state state)
 {
     network_state s = {0};
@@ -215,13 +230,17 @@ void forward_gru_layer(layer l, network_state state)
     fill_cpu(l.outputs * l.batch * l.steps, 0, state_r_layer.delta, 1);
     fill_cpu(l.outputs * l.batch * l.steps, 0, state_h_layer.delta, 1);
     if(state.train) {
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         fill_cpu(l.outputs * l.batch * l.steps, 0, l.delta, 1);
         copy_cpu(l.outputs*l.batch, l.state, 1, l.prev_state, 1);
     }
 
     for (i = 0; i < l.steps; ++i) {
         s.input = l.state;
+<<<<<<< HEAD
 <<<<<<< HEAD
         forward_connected_layer(wz, s);
         forward_connected_layer(wr, s);
@@ -238,6 +257,8 @@ void forward_gru_layer(layer l, network_state state)
         copy_cpu(l.outputs*l.batch, ur.output, 1, l.r_cpu, 1);
         axpy_cpu(l.outputs*l.batch, 1, wr.output, 1, l.r_cpu, 1);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         forward_connected_layer(state_z_layer, s);
         forward_connected_layer(state_r_layer, s);
 
@@ -252,7 +273,10 @@ void forward_gru_layer(layer l, network_state state)
 
         copy_cpu(l.outputs*l.batch, input_r_layer.output, 1, l.r_cpu, 1);
         axpy_cpu(l.outputs*l.batch, 1, state_r_layer.output, 1, l.r_cpu, 1);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
         activate_array(l.z_cpu, l.outputs*l.batch, LOGISTIC);
         activate_array(l.r_cpu, l.outputs*l.batch, LOGISTIC);
@@ -261,6 +285,7 @@ void forward_gru_layer(layer l, network_state state)
         mul_cpu(l.outputs*l.batch, l.r_cpu, 1, l.forgot_state, 1);
 
         s.input = l.forgot_state;
+<<<<<<< HEAD
 <<<<<<< HEAD
         forward_connected_layer(wh, s);
 
@@ -273,6 +298,8 @@ void forward_gru_layer(layer l, network_state state)
             activate_array(l.h_cpu, l.outputs*l.batch, LOGISTIC);
         }
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         forward_connected_layer(state_h_layer, s);
 
         copy_cpu(l.outputs*l.batch, input_h_layer.output, 1, l.h_cpu, 1);
@@ -283,12 +310,16 @@ void forward_gru_layer(layer l, network_state state)
         #else
         activate_array(l.h_cpu, l.outputs*l.batch, LOGISTIC);
         #endif
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
         weighted_sum_cpu(l.state, l.h_cpu, l.z_cpu, l.outputs*l.batch, l.output);
 
         copy_cpu(l.outputs*l.batch, l.output, 1, l.state, 1);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         net.input += l.inputs*l.batch;
         l.output += l.outputs*l.batch;
@@ -304,6 +335,8 @@ void forward_gru_layer(layer l, network_state state)
 
 void backward_gru_layer(layer l, network net)
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         state.input += l.inputs*l.batch;
         l.output += l.outputs*l.batch;
         increment_layer(&input_z_layer, 1);
@@ -317,7 +350,10 @@ void backward_gru_layer(layer l, network net)
 }
 
 void backward_gru_layer(layer l, network_state state)
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 {
 }
 
@@ -333,6 +369,7 @@ void push_gru_layer(layer l)
 
 void update_gru_layer_gpu(layer l, int batch, float learning_rate, float momentum, float decay)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     update_connected_layer_gpu(*(l.ur), batch, learning_rate, momentum, decay);
     update_connected_layer_gpu(*(l.uz), batch, learning_rate, momentum, decay);
@@ -364,6 +401,8 @@ void forward_gru_layer_gpu(layer l, network net)
     fill_ongpu(l.outputs * l.batch * l.steps, 0, wh.delta_gpu, 1);
     if(net.train) {
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     update_connected_layer_gpu(*(l.input_r_layer), batch, learning_rate, momentum, decay);
     update_connected_layer_gpu(*(l.input_z_layer), batch, learning_rate, momentum, decay);
     update_connected_layer_gpu(*(l.input_h_layer), batch, learning_rate, momentum, decay);
@@ -393,12 +432,16 @@ void forward_gru_layer_gpu(layer l, network_state state)
     fill_ongpu(l.outputs * l.batch * l.steps, 0, state_r_layer.delta_gpu, 1);
     fill_ongpu(l.outputs * l.batch * l.steps, 0, state_h_layer.delta_gpu, 1);
     if(state.train) {
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         fill_ongpu(l.outputs * l.batch * l.steps, 0, l.delta_gpu, 1);
         copy_ongpu(l.outputs*l.batch, l.state_gpu, 1, l.prev_state_gpu, 1);
     }
 
     for (i = 0; i < l.steps; ++i) {
+<<<<<<< HEAD
 <<<<<<< HEAD
         s.input_gpu = l.state_gpu;
         forward_connected_layer_gpu(wz, s);
@@ -415,6 +458,8 @@ void forward_gru_layer_gpu(layer l, network_state state)
         copy_ongpu(l.outputs*l.batch, ur.output_gpu, 1, l.r_gpu, 1);
         axpy_ongpu(l.outputs*l.batch, 1, wr.output_gpu, 1, l.r_gpu, 1);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         s.input = l.state_gpu;
         forward_connected_layer_gpu(state_z_layer, s);
         forward_connected_layer_gpu(state_r_layer, s);
@@ -430,7 +475,10 @@ void forward_gru_layer_gpu(layer l, network_state state)
 
         copy_ongpu(l.outputs*l.batch, input_r_layer.output_gpu, 1, l.r_gpu, 1);
         axpy_ongpu(l.outputs*l.batch, 1, state_r_layer.output_gpu, 1, l.r_gpu, 1);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
         activate_array_ongpu(l.z_gpu, l.outputs*l.batch, LOGISTIC);
         activate_array_ongpu(l.r_gpu, l.outputs*l.batch, LOGISTIC);
@@ -438,6 +486,7 @@ void forward_gru_layer_gpu(layer l, network_state state)
         copy_ongpu(l.outputs*l.batch, l.state_gpu, 1, l.forgot_state_gpu, 1);
         mul_ongpu(l.outputs*l.batch, l.r_gpu, 1, l.forgot_state_gpu, 1);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         s.input_gpu = l.forgot_state_gpu;
         forward_connected_layer_gpu(wh, s);
@@ -490,6 +539,8 @@ void backward_gru_layer_gpu(layer l, network net)
     net.input_gpu += l.inputs*l.batch*(l.steps-1);
     if(net.delta_gpu) net.delta_gpu += l.inputs*l.batch*(l.steps-1);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         s.input = l.forgot_state_gpu;
         forward_connected_layer_gpu(state_h_layer, s);
 
@@ -541,7 +592,10 @@ void backward_gru_layer_gpu(layer l, network_state state)
 
     state.input += l.inputs*l.batch*(l.steps-1);
     if(state.delta) state.delta += l.inputs*l.batch*(l.steps-1);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     l.output_gpu += l.outputs*l.batch*(l.steps-1);
     l.delta_gpu += l.outputs*l.batch*(l.steps-1);
     for (i = l.steps-1; i >= 0; --i) {
@@ -549,22 +603,29 @@ void backward_gru_layer_gpu(layer l, network_state state)
         float *prev_delta_gpu = (i == 0) ? 0 : l.delta_gpu - l.outputs*l.batch;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         copy_ongpu(l.outputs*l.batch, uz.output_gpu, 1, l.z_gpu, 1);
         axpy_ongpu(l.outputs*l.batch, 1, wz.output_gpu, 1, l.z_gpu, 1);
 
         copy_ongpu(l.outputs*l.batch, ur.output_gpu, 1, l.r_gpu, 1);
         axpy_ongpu(l.outputs*l.batch, 1, wr.output_gpu, 1, l.r_gpu, 1);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         copy_ongpu(l.outputs*l.batch, input_z_layer.output_gpu, 1, l.z_gpu, 1);
         axpy_ongpu(l.outputs*l.batch, 1, state_z_layer.output_gpu, 1, l.z_gpu, 1);
 
         copy_ongpu(l.outputs*l.batch, input_r_layer.output_gpu, 1, l.r_gpu, 1);
         axpy_ongpu(l.outputs*l.batch, 1, state_r_layer.output_gpu, 1, l.r_gpu, 1);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 
         activate_array_ongpu(l.z_gpu, l.outputs*l.batch, LOGISTIC);
         activate_array_ongpu(l.r_gpu, l.outputs*l.batch, LOGISTIC);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         copy_ongpu(l.outputs*l.batch, uh.output_gpu, 1, l.h_gpu, 1);
         axpy_ongpu(l.outputs*l.batch, 1, wh.output_gpu, 1, l.h_gpu, 1);
@@ -586,6 +647,8 @@ void backward_gru_layer_gpu(layer l, network_state state)
         copy_ongpu(l.outputs*l.batch, uh.delta_gpu, 1, wh.delta_gpu, 1);
 
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         copy_ongpu(l.outputs*l.batch, input_h_layer.output_gpu, 1, l.h_gpu, 1);
         axpy_ongpu(l.outputs*l.batch, 1, state_h_layer.output_gpu, 1, l.h_gpu, 1);
 
@@ -605,11 +668,15 @@ void backward_gru_layer_gpu(layer l, network_state state)
 
         copy_ongpu(l.outputs*l.batch, input_h_layer.delta_gpu, 1, state_h_layer.delta_gpu, 1);
         
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         copy_ongpu(l.outputs*l.batch, l.prev_state_gpu, 1, l.forgot_state_gpu, 1);
         mul_ongpu(l.outputs*l.batch, l.r_gpu, 1, l.forgot_state_gpu, 1);
         fill_ongpu(l.outputs*l.batch, 0, l.forgot_delta_gpu, 1);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         s.input_gpu = l.forgot_state_gpu;
         s.delta_gpu = l.forgot_delta_gpu;
@@ -650,6 +717,8 @@ void backward_gru_layer_gpu(layer l, network_state state)
         increment_layer(&wr, -1);
         increment_layer(&wh, -1);
 =======
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
         s.input = l.forgot_state_gpu;
         s.delta = l.forgot_delta_gpu;
         
@@ -688,7 +757,10 @@ void backward_gru_layer_gpu(layer l, network_state state)
         increment_layer(&state_z_layer, -1);
         increment_layer(&state_r_layer, -1);
         increment_layer(&state_h_layer, -1);
+<<<<<<< HEAD
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     }
 }
 #endif

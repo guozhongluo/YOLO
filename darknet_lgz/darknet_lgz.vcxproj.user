@@ -6,10 +6,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <LocalDebuggerCommandArguments>detector test cfg/voc.data cfg/tiny-yolo-voc.cfg cfg/tiny-yolo-voc.weights data/dog.jpg</LocalDebuggerCommandArguments>
 =======
     <LocalDebuggerCommandArguments>yolo -nogpu test data/yolo_tiny.cfg data/yolo_tiny.weights</LocalDebuggerCommandArguments>
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    <LocalDebuggerCommandArguments>yolo -nogpu test data/yolo_tiny.cfg data/yolo_tiny.weights</LocalDebuggerCommandArguments>
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

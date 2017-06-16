@@ -32,10 +32,14 @@ __device__ float loggy_activate_kernel(float x){return 2./(1. + exp(-x)) - 1;}
 __device__ float relu_activate_kernel(float x){return x*(x>0);}
 __device__ float elu_activate_kernel(float x){return (x >= 0)*x + (x < 0)*(exp(x)-1);}
 <<<<<<< HEAD
+<<<<<<< HEAD
 __device__ float relie_activate_kernel(float x){return (x>0) ? x : .01*x;}
 =======
 __device__ float relie_activate_kernel(float x){return x*(x>0);}
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+__device__ float relie_activate_kernel(float x){return x*(x>0);}
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 __device__ float ramp_activate_kernel(float x){return x*(x>0)+.1*x;}
 __device__ float leaky_activate_kernel(float x){return (x>0) ? x : .1*x;}
 __device__ float tanh_activate_kernel(float x){return (2/(1 + exp(-2*x)) - 1);}

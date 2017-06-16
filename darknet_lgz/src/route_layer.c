@@ -2,18 +2,25 @@
 #include "cuda.h"
 #include "blas.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 #include <stdio.h>
 
 route_layer make_route_layer(int batch, int n, int *input_layers, int *input_sizes)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     fprintf(stderr,"route ");
 =======
     fprintf(stderr,"Route Layer:");
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    fprintf(stderr,"Route Layer:");
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     route_layer l = {0};
     l.type = ROUTE;
     l.batch = batch;
@@ -32,6 +39,7 @@ route_layer make_route_layer(int batch, int n, int *input_layers, int *input_siz
     l.delta =  calloc(outputs*batch, sizeof(float));
     l.output = calloc(outputs*batch, sizeof(float));;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     l.forward = forward_route_layer;
     l.backward = backward_route_layer;
@@ -42,12 +50,16 @@ route_layer make_route_layer(int batch, int n, int *input_layers, int *input_siz
 =======
     #ifdef GPU
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+    #ifdef GPU
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
     l.delta_gpu =  cuda_make_array(l.delta, outputs*batch);
     l.output_gpu = cuda_make_array(l.output, outputs*batch);
     #endif
     return l;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void resize_route_layer(route_layer *l, network *net)
 {
@@ -85,6 +97,8 @@ void resize_route_layer(route_layer *l, network *net)
 
 =======
 >>>>>>> b5b3d7367411302dd6e73c8fe583d6860a786445
+=======
+>>>>>>> 07267f401b3d9c82c5f695f932c9f504d2b6a592
 void forward_route_layer(const route_layer l, network net)
 {
     int i, j;
