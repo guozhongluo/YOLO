@@ -1,0 +1,1 @@
+darknet_lgz yolo test yolo-tiny.cfg yolo_tiny.caffemodel person.jpg 0.2
